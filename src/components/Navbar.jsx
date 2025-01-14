@@ -1,19 +1,37 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 const Navbar = () => {
+  const { user, signOutUser } = useAuth();
   const DropDownLinks = (
     <>
       {" "}
-      <li>
-        <NavLink to="/dashboard">Dashboard</NavLink>
-      </li>
-      <li>
-        <NavLink>Sign In</NavLink>
-      </li>
-      <li>
-        <NavLink>Sign Out</NavLink>
-      </li>
+      {user && (
+        <li>
+          <NavLink to="/dashboard">Dashboard</NavLink>
+        </li>
+      )}
+      {user ? (
+        <li>
+          <button
+            className="bg-red-400 hover:bg-red-700 text-white block text-center font-bold mt-5"
+            onClick={signOutUser}
+          >
+            Logout
+          </button>
+        </li>
+      ) : (
+        <>
+          {" "}
+          <li>
+            <NavLink to="login">Sign In</NavLink>
+          </li>
+          <li>
+            <NavLink to="Sign-up">Sign up</NavLink>
+          </li>
+        </>
+      )}
     </>
   );
 
@@ -72,7 +90,11 @@ const Navbar = () => {
               <div className="w-10 rounded-full">
                 <img
                   alt="Tailwind CSS Navbar component"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                  src={
+                    user
+                      ? user.photoURL
+                      : "https://i.ibb.co.com/5jL18Qz/avater.webp"
+                  }
                 />
               </div>
             </div>

@@ -52,6 +52,8 @@ const AuthProvider = ({ children }) => {
   //onAuthStateChanged
   useEffect(() => {
     const unSub = onAuthStateChanged(auth, async (currentUser) => {
+      setUser(currentUser);
+      setLoading(false);
       console.log(currentUser);
       //   if (currentUser?.email) {
       //     setUser(currentUser);
