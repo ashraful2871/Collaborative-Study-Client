@@ -1,11 +1,13 @@
 import React from "react";
 import useAuth from "../../hooks/useAuth";
+import axios from "axios";
 
 const CreateStudy = () => {
   const { user } = useAuth();
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
+    const sessionTitle = formData.get("title");
     const registrationStart = formData.get("registration-start");
     const registrationEnd = formData.get("registration-end");
     const classStart = formData.get("class-start");
@@ -14,6 +16,7 @@ const CreateStudy = () => {
     const registrationFee = formData.get("registration-fee");
     const description = formData.get("description");
     const createData = {
+      sessionTitle,
       registrationStart,
       registrationEnd,
       classStart,
@@ -24,6 +27,11 @@ const CreateStudy = () => {
       status: "Pending",
     };
     console.log(createData);
+    const { data } = await axios.post(
+      `${import.meta.env.VITE_API_URL}/create-study`,
+      createData
+    );
+    console.log(data);
   };
 
   return (
@@ -36,6 +44,18 @@ const CreateStudy = () => {
           onSubmit={handleSubmit}
           className="card-body grid grid-cols-2 gap-5"
         >
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Session Title</span>
+            </label>
+            <input
+              type="text"
+              name="title"
+              placeholder="Session Title"
+              className="input input-bordered"
+              required
+            />
+          </div>
           <div className="form-control">
             <label className="label">
               <span className="label-text">Name</span>
@@ -138,7 +158,7 @@ const CreateStudy = () => {
               required
             />
           </div>
-          <div className="form-control col-span-2">
+          <div className="form-control">
             <label className="label">
               <span className="label-text">Session Description</span>
             </label>
