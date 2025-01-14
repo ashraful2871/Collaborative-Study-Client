@@ -9,6 +9,9 @@ import CreateStudy from "../pages/Tutor-page/CreateStudy";
 import ViewAllStudy from "../pages/Tutor-page/ViewAllStudy";
 import ViewAllMaterials from "../pages/Tutor-page/ViewAllMaterials";
 import UploadMaterials from "../pages/Tutor-page/UploadMaterials";
+import AllUsers from "../pages/admin page/AllUsers";
+import AllStudySession from "../pages/admin page/AllStudySession";
+import AllMaterials from "../pages/admin page/AllMaterials";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -30,8 +33,13 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
+    element: (
+      <Privet>
+        <Dashboard></Dashboard>
+      </Privet>
+    ),
     children: [
+      //tutor routs only
       {
         path: "create-study",
         element: <CreateStudy></CreateStudy>,
@@ -47,6 +55,20 @@ export const router = createBrowserRouter([
       {
         path: "view-all-materials",
         element: <ViewAllMaterials></ViewAllMaterials>,
+      },
+
+      //admin routs only
+      {
+        path: "all-users",
+        element: <AllUsers></AllUsers>,
+      },
+      {
+        path: "all-study-session",
+        element: <AllStudySession></AllStudySession>,
+      },
+      {
+        path: "all-materials",
+        element: <AllMaterials></AllMaterials>,
       },
     ],
   },
