@@ -18,7 +18,7 @@ const ViewAllStudy = () => {
       return data;
     },
   });
-  console.log(allStudy);
+  // console.log(allStudy);
   if (isLoading) {
     return <Loading></Loading>;
   }

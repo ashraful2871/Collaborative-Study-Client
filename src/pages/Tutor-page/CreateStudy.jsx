@@ -35,11 +35,11 @@ const CreateStudy = () => {
         });
         console.log(response.data.data.display_url);
         if (response.data.success) {
-          imageUrl = response.data.data.display_url; // Get the hosted image URL
+          imageUrl = response.data.data.display_url;
         }
       } catch (error) {
         console.error("Image upload failed:", error);
-        return; // Exit if image upload fails
+        return;
       }
     }
 

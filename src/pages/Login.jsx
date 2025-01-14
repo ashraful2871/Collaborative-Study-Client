@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import useAuth from "../hooks/useAuth";
+import axios from "axios";
 
 const Login = () => {
   const { signInUser, googleLogin } = useAuth();
@@ -49,18 +50,17 @@ const Login = () => {
     googleLogin()
       .then((result) => {
         console.log(result.user);
-        toast.success("Successfully login");
-        navigate(location?.state ? location.state : "/");
+        toast.success("Successfully Signed Up");
+        const userInfo = {
+          email: result.user?.email,
+          name: result.user?.displayName,
+          role: "student",
+        };
+        axios.post(`${import.meta.env.VITE_API_URL}/users`, userInfo);
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);
-        toast.error("Invalid Email & Password", {
-          style: {
-            borderRadius: "10px",
-            background: "#333",
-            color: "#fff",
-          },
-        });
       });
   };
 

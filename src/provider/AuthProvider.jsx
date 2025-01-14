@@ -50,6 +50,26 @@ const AuthProvider = ({ children }) => {
     });
   };
 
+  //save user in db
+
+  const saveUserInDb = async (user) => {
+    const newUser = {
+      name: user?.displayName,
+      email: user?.email,
+      role: "student",
+    };
+
+    try {
+      const { data } = axios.post(
+        `${import.meta.env.VITE_API_URL}/users`,
+        newUser
+      );
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   //onAuthStateChanged
   useEffect(() => {
     const unSub = onAuthStateChanged(auth, async (currentUser) => {
@@ -58,6 +78,7 @@ const AuthProvider = ({ children }) => {
         setUser(currentUser);
 
         try {
+          // saveUserInDb(currentUser);
           // Request JWT token from backend
           const { data } = await axios.post(
             `${import.meta.env.VITE_API_URL}/jwt`,

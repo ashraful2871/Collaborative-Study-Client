@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import useAuth from "../hooks/useAuth";
+import axios from "axios";
 
 const SignUp = () => {
   const { signUpUser, setUser, updateUserProfile, googleLogin } = useAuth();
@@ -69,17 +70,19 @@ const SignUp = () => {
 
     //sign up user
     signUpUser(email, password)
-      .then((result) => {
+      .then(async (result) => {
         console.log(result.user);
-        updateUserProfile(name, photo);
+        await updateUserProfile(name, photo);
         setUser({ ...result.user, photoURL: photo, displayName: name });
-        toast.success("Signed Up Successfully Login Now", {
-          style: {
-            borderRadius: "10px",
-            background: "#333",
-            color: "#fff",
-          },
-        });
+        const userInfo = {
+          email: result.user.email,
+          name: name,
+          role: "student",
+        };
+        console.log(userInfo.name);
+        axios.post(`${import.meta.env.VITE_API_URL}/users`, userInfo);
+
+        toast.success("Signed Up Successfully! Login Now");
         navigate("/login");
       })
       .catch((error) => {
@@ -91,13 +94,13 @@ const SignUp = () => {
     googleLogin()
       .then((result) => {
         console.log(result.user);
-        toast.success("Successfully Signed Up", {
-          style: {
-            borderRadius: "10px",
-            background: "#333",
-            color: "#fff",
-          },
-        });
+        toast.success("Successfully Signed Up");
+        const userInfo = {
+          email: result.user?.email,
+          name: result.user?.displayName,
+          role: "student",
+        };
+        axios.post(`${import.meta.env.VITE_API_URL}/users`, userInfo);
         navigate("/");
       })
       .catch((error) => {
@@ -119,7 +122,7 @@ const SignUp = () => {
             </label>
             <input
               type="text"
-              placeholder="email"
+              placeholder="Name"
               name="name"
               className="input input-bordered"
               required
