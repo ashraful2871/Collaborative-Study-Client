@@ -22,7 +22,7 @@ const Slider = () => {
         }}
         navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
-        className="mySwiper h-[400px] border-2 border-red-600 rounded-xl text-center"
+        className="mySwiper h-[400px]  border-2 border-red-600 rounded-xl text-center"
       >
         <SwiperSlide>
           <img
