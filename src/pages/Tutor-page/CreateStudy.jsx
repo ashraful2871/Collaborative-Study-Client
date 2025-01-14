@@ -1,33 +1,66 @@
 import React from "react";
 import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 import axios from "axios";
 
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_upload_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const CreateStudy = () => {
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const sessionTitle = formData.get("title");
+    const image = formData.get("image");
     const registrationStart = formData.get("registration-start");
     const registrationEnd = formData.get("registration-end");
     const classStart = formData.get("class-start");
     const classEnd = formData.get("class-end");
-    const duration = formData.get("duration");
+    const hour = formData.get("duration-hours");
+    const minute = formData.get("duration-minutes");
     const registrationFee = formData.get("registration-fee");
     const description = formData.get("description");
+
+    let imageUrl = "";
+    if (image) {
+      const imgFormData = new FormData();
+      imgFormData.append("image", image);
+
+      try {
+        const response = await axios.post(image_upload_api, imgFormData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        console.log(response.data.data.display_url);
+        if (response.data.success) {
+          imageUrl = response.data.data.display_url; // Get the hosted image URL
+        }
+      } catch (error) {
+        console.error("Image upload failed:", error);
+        return; // Exit if image upload fails
+      }
+    }
+
     const createData = {
+      tutor: {
+        name: user?.displayName,
+        email: user?.email,
+      },
       sessionTitle,
+      image: imageUrl,
       registrationStart,
       registrationEnd,
       classStart,
       classEnd,
-      duration,
+      duration: { hour, minute },
       registrationFee,
       description,
       status: "Pending",
     };
     console.log(createData);
-    const { data } = await axios.post(
+    const { data } = await axiosSecure.post(
       `${import.meta.env.VITE_API_URL}/create-study`,
       createData
     );
@@ -80,6 +113,18 @@ const CreateStudy = () => {
               type="email"
               name="email"
               placeholder="email"
+              className="input input-bordered"
+              required
+            />
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Session Image</span>
+            </label>
+            <input
+              type="file"
+              name="image"
+              placeholder="Image url"
               className="input input-bordered"
               required
             />
@@ -137,13 +182,25 @@ const CreateStudy = () => {
             <label className="label">
               <span className="label-text">Session duration</span>
             </label>
-            <input
-              type="text"
-              name="duration"
-              placeholder="Session duration"
-              className="input input-bordered"
-              required
-            />
+            <div className="flex gap-2">
+              <input
+                type="number"
+                name="duration-hours"
+                placeholder="Hours"
+                className="input input-bordered w-1/2"
+                min="0"
+                required
+              />
+              <input
+                type="number"
+                name="duration-minutes"
+                placeholder="Minutes"
+                className="input input-bordered w-1/2"
+                min="0"
+                max="59"
+                required
+              />
+            </div>
           </div>
           <div className="form-control">
             <label className="label">

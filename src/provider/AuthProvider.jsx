@@ -10,6 +10,7 @@ import {
 
 import { auth } from "../firebase/firebase.init";
 import { createContext, useEffect, useState } from "react";
+import axios from "axios";
 
 export const AuthContext = createContext();
 
@@ -52,50 +53,30 @@ const AuthProvider = ({ children }) => {
   //onAuthStateChanged
   useEffect(() => {
     const unSub = onAuthStateChanged(auth, async (currentUser) => {
-      setUser(currentUser);
-      setLoading(false);
-      console.log(currentUser);
-      //   if (currentUser?.email) {
-      //     setUser(currentUser);
+      setLoading(true);
+      if (currentUser?.email) {
+        setUser(currentUser);
 
-      //     //generate token
-      //     const { data } = await axios.post(
-      //       `${import.meta.env.VITE_API_URL}/jwt`,
-      //       {
-      //         email: currentUser?.email,
-      //       },
-      //       { withCredentials: true }
-      //     );
-      //   } else {
-      //     setUser(currentUser);
-      //     //clear token
-      //     const response = await axios.post(
-      //       `${import.meta.env.VITE_API_URL}/logout`,
-      //       {},
-      //       {
-      //         withCredentials: true,
-      //       }
-      //     );
-      //     console.log(response);
-      //   }
-      //   if (currentUser) {
-      //     const userInfo = { email: currentUser.email };
-      //     axiosPublic
-      //       .post("/jwt", userInfo)
-      //       .then((res) => {
-      //         if (res.data.token) {
-      //           localStorage.setItem("access-token", res.data.token);
-      //           setLoading(false);
-      //         }
-      //       })
-      //       .catch((error) => {
-      //         console.error("Failed to fetch JWT:", error);
-      //       });
-      //   } else {
-      //     localStorage.removeItem("access-token");
-      //     setLoading(false);
-      //   }
-      //   setLoading(false);
+        try {
+          // Request JWT token from backend
+          const { data } = await axios.post(
+            `${import.meta.env.VITE_API_URL}/jwt`,
+            { email: currentUser.email }
+          );
+
+          if (data.token) {
+            localStorage.setItem("access-token", data.token); // Store token
+          }
+        } catch (error) {
+          console.error("Failed to fetch JWT token:", error);
+          localStorage.removeItem("access-token"); // Clear token on failure
+        }
+      } else {
+        // No user logged in, clear token
+        setUser(null);
+        localStorage.removeItem("access-token");
+      }
+      setLoading(false);
     });
     return () => {
       unSub();
