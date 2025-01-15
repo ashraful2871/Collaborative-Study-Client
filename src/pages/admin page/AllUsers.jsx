@@ -1,19 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
+  const [search, setSearch] = useState("");
   const { data: users = [], refetch } = useQuery({
-    queryKey: ["users"],
+    queryKey: ["users", search],
     queryFn: async () => {
-      const { data } = await axiosSecure.get("/users");
+      const { data } = await axiosSecure.get(`/users?search=${search}`);
       return data;
     },
   });
-  console.log(users);
 
+  //make admin
   const handleMAkeAdmin = async (user) => {
     Swal.fire({
       title: "Are you sure?",
@@ -25,10 +26,10 @@ const AllUsers = () => {
       confirmButtonText: "Yes, Admin it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const { data } = await axiosSecure.patch(`/user/role/${user?.email}`, {
+        axiosSecure.patch(`/user/role/${user?.email}`, {
           role: "admin",
         });
-        console.log(data);
+
         refetch();
         Swal.fire({
           title: "Success!",
@@ -51,10 +52,10 @@ const AllUsers = () => {
       confirmButtonText: "Yes, Tutor it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const { data } = await axiosSecure.patch(`/user/role/${user?.email}`, {
+        axiosSecure.patch(`/user/role/${user?.email}`, {
           role: "tutor",
         });
-        console.log(data);
+
         refetch();
         Swal.fire({
           title: "Success!",
@@ -68,7 +69,8 @@ const AllUsers = () => {
     <div>
       <h2>all user: {users.length}</h2>
       <input
-        type="text"
+        type="email"
+        onChange={(e) => setSearch(e.target.value)}
         placeholder="Search by Email"
         className="input input-bordered w-full max-w-xs"
       />
