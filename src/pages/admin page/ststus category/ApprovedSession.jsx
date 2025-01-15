@@ -1,12 +1,13 @@
 import React from "react";
-import { FaTrashRestoreAlt } from "react-icons/fa";
-import { FcApproval } from "react-icons/fc";
+import { FaEdit, FaTrashRestoreAlt } from "react-icons/fa";
 
 const ApprovedSession = ({ approvedSession }) => {
   return (
     <div>
       <div>
-        <h2 className="text-4xl font-bold">Approved Session:</h2>
+        <h2 className="text-4xl font-bold">
+          Approved Session: <span>{approvedSession.length}</span>
+        </h2>
         <div className="overflow-x-auto">
           <table className="table">
             {/* head */}
@@ -53,13 +54,13 @@ const ApprovedSession = ({ approvedSession }) => {
                         //disabled={booking.status === "Canceled"}
                         className="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600 transition-all flex gap-1 items-center shadow-md disabled:bg-gray-500 disabled:cursor-not-allowed"
                       >
-                        <FcApproval /> Approve
+                        <FaEdit /> Update
                       </button>
                       <button
                         //disabled={booking.status === "Canceled"}
                         className="bg-red-500 text-white px-3 py-1 rounded text-sm hover:bg-red-600 transition-all flex gap-1 items-center shadow-md disabled:bg-gray-500 disabled:cursor-not-allowed"
                       >
-                        <FaTrashRestoreAlt /> Reject
+                        <FaTrashRestoreAlt /> Delete
                       </button>
                     </div>
                   </th>
