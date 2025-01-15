@@ -8,7 +8,11 @@ import RejectedSession from "./ststus category/RejectedSession";
 
 const AllStudySession = () => {
   const axiosSecure = useAxiosSecure();
-  const { data: AllStudySession = [], isLoading } = useQuery({
+  const {
+    data: AllStudySession = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["all-study-session"],
     queryFn: async () => {
       const { data } = await axiosSecure.get("/all-study-session");
@@ -38,19 +42,18 @@ const AllStudySession = () => {
     return <Loading></Loading>;
   }
   return (
-    <div>
-      <h2 className="text-4xl font-bold">Pending Session:</h2>
-      {pendingSession.map((session) => (
-        <PendingSession key={session._id} session={session}></PendingSession>
-      ))}
-      <h2 className="text-4xl font-bold">Approved Session:</h2>
-      {approvedSession.map((session) => (
-        <ApprovedSession key={session._id} session={session}></ApprovedSession>
-      ))}
-      <h2 className="text-4xl font-bold">Reject Session:</h2>
-      {rejectedSession.map((session) => (
-        <RejectedSession key={session._id} session={session}></RejectedSession>
-      ))}
+    <div className="space-y-5">
+      {/* pending session */}
+      <PendingSession
+        pendingSession={pendingSession}
+        refetch={refetch}
+      ></PendingSession>
+
+      {/* approved session */}
+      <ApprovedSession approvedSession={approvedSession}></ApprovedSession>
+
+      {/* rejected session */}
+      <RejectedSession rejectedSession={rejectedSession}></RejectedSession>
     </div>
   );
 };
