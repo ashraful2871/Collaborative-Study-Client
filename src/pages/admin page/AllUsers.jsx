@@ -67,7 +67,6 @@ const AllUsers = () => {
   };
   return (
     <div>
-      <h2>all user: {users.length}</h2>
       <input
         type="email"
         onChange={(e) => setSearch(e.target.value)}
