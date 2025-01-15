@@ -50,7 +50,7 @@ const UploadMaterialModal = ({ material, onClose }) => {
       uploadMaterialData
     );
     console.log(data);
-    onClose(); // Close modal after submission
+    onClose();
   };
 
   return (

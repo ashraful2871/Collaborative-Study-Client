@@ -5,17 +5,16 @@ const UploadMaterialsCard = ({ material }) => {
   const [selectedMaterial, setSelectedMaterial] = useState(null);
 
   useEffect(() => {
-    // Show the modal after it has been rendered
     if (selectedMaterial) {
       const modal = document.getElementById("upload_material_modal");
       if (modal) {
         modal.showModal();
       }
     }
-  }, [selectedMaterial]); // Trigger effect whenever `selectedMaterial` changes
+  }, [selectedMaterial]);
 
   const openModal = () => {
-    setSelectedMaterial(material); // Pass the current material to the modal
+    setSelectedMaterial(material);
   };
 
   return (
@@ -29,7 +28,6 @@ const UploadMaterialsCard = ({ material }) => {
         />
       </figure>
 
-      {/* Card Body */}
       <div className="card-body">
         {/* Status */}
         <span className="badge badge-success">{material.status}</span>
@@ -49,7 +47,7 @@ const UploadMaterialsCard = ({ material }) => {
       {selectedMaterial && (
         <UploadMaterialModal
           material={selectedMaterial}
-          onClose={() => setSelectedMaterial(null)} // Reset state on close
+          onClose={() => setSelectedMaterial(null)}
         />
       )}
     </div>

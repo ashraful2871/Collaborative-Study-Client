@@ -41,11 +41,12 @@ const RejectedSession = ({ rejectedSession }) => {
                   </td>
                   <td>{session.tutor.name}</td>
                   <td> {session.tutor.email}</td>
-                  <th>
-                    <button className="btn btn-ghost btn-xs">
-                      {session.status}
-                    </button>
-                  </th>
+                  <td>
+                    <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-sm font-bold shadow-md transition-colors">
+                      <span className="h-2 w-2 rounded-full bg-red-500"></span>
+                      <span className="text-red-600">{session.status}</span>
+                    </div>
+                  </td>
                   <th>
                     <div className="flex justify-center gap-4">
                       <button

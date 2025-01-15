@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaTrashRestoreAlt } from "react-icons/fa";
 import { FcApproval } from "react-icons/fc";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import ApproveModal from "../../../components/modal/ApproveModal";
 
 const PendingSession = ({ pendingSession, refetch }) => {
+  const [approve, setApprove] = useState(null);
   const axiosSecure = useAxiosSecure();
   const handleStatusChange = (id) => {
     Swal.fire({
@@ -30,6 +32,20 @@ const PendingSession = ({ pendingSession, refetch }) => {
       }
     });
   };
+
+  useEffect(() => {
+    if (approve) {
+      const modal = document.getElementById("upload_material_modal");
+      if (modal) {
+        modal.showModal();
+      }
+    }
+  }, [approve]);
+
+  const openModal = (session) => {
+    setApprove(session);
+  };
+
   return (
     <div>
       <h2 className="text-4xl font-bold">Pending Session:</h2>
@@ -68,14 +84,16 @@ const PendingSession = ({ pendingSession, refetch }) => {
                 </td>
                 <td>{session.tutor.name}</td>
                 <td> {session.tutor.email}</td>
-                <th>
-                  <button className="btn btn-ghost btn-xs">
-                    {session.status}
-                  </button>
-                </th>
+                <td>
+                  <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-sm font-bold shadow-md transition-colors">
+                    <span className="h-2 w-2 rounded-full bg-yellow-500"></span>
+                    <span className="text-yellow-600">{session.status}</span>
+                  </div>
+                </td>
                 <th>
                   <div className="flex justify-center gap-4">
                     <button
+                      onClick={() => openModal(session)}
                       //disabled={booking.status === "Canceled"}
                       className="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600 transition-all flex gap-1 items-center shadow-md disabled:bg-gray-500 disabled:cursor-not-allowed"
                     >
@@ -95,6 +113,14 @@ const PendingSession = ({ pendingSession, refetch }) => {
           </tbody>
         </table>
       </div>
+
+      {approve && (
+        <ApproveModal
+          approve={approve}
+          onClose={() => setApprove(null)}
+          refetch={refetch}
+        ></ApproveModal>
+      )}
     </div>
   );
 };
