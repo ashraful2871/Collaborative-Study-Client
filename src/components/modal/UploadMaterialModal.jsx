@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -10,8 +10,10 @@ const UploadMaterialModal = ({ material, onClose }) => {
   const { sessionTitle, _id } = material;
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     const formData = new FormData(e.target);
     const image = formData.get("image");
@@ -51,6 +53,7 @@ const UploadMaterialModal = ({ material, onClose }) => {
     );
     console.log(data);
     onClose();
+    setLoading(false);
   };
 
   return (
@@ -128,9 +131,15 @@ const UploadMaterialModal = ({ material, onClose }) => {
           />
         </div>
         <div className="form-control mt-4">
-          <button type="submit" className="btn btn-primary w-full">
-            Upload Material
-          </button>
+          {loading ? (
+            <button className="btn btn-primary w-full">
+              <span className="loading loading-spinner"></span>
+            </button>
+          ) : (
+            <button type="submit" className="btn btn-primary w-full">
+              Upload Material
+            </button>
+          )}
         </div>
       </form>
     </dialog>
