@@ -2,6 +2,7 @@ import React from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import TutorMenu from "../../components/sidebar/tutor/Tutormenu";
 import AdminMenu from "../../components/sidebar/admin/AdminMenu";
+import StudentMenu from "../../components/sidebar/admin/student/StudentMenu";
 
 const Dashboard = () => {
   return (
@@ -11,6 +12,7 @@ const Dashboard = () => {
         <div className="w-64 p-4 min-h-screen bg-orange-400">
           <TutorMenu></TutorMenu>
           <AdminMenu></AdminMenu>
+          <StudentMenu></StudentMenu>
           <hr />
           <ul className="menu">
             <li>

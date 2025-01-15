@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import axios from "axios";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_upload_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const CreateStudy = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     const formData = new FormData(e.target);
     const sessionTitle = formData.get("title");
@@ -38,7 +44,7 @@ const CreateStudy = () => {
           imageUrl = response.data.data.display_url;
         }
       } catch (error) {
-        console.error("Image upload failed:", error);
+        toast.error("Image upload failed:", error);
         return;
       }
     }
@@ -64,7 +70,11 @@ const CreateStudy = () => {
       `${import.meta.env.VITE_API_URL}/create-study`,
       createData
     );
-    console.log(data);
+    // console.log(data);
+
+    setLoading(false);
+    toast.success("study create successfully");
+    navigate("/dashboard/view-all-study");
   };
 
   return (
@@ -227,7 +237,13 @@ const CreateStudy = () => {
           </div>
 
           <div className="form-control mt-6 col-span-2">
-            <button className="btn btn-primary">Create </button>
+            {loading ? (
+              <button className="btn btn-primary w-full">
+                <span className="loading loading-spinner"></span>
+              </button>
+            ) : (
+              <button className="btn btn-primary">Create </button>
+            )}
           </div>
         </form>
       </div>

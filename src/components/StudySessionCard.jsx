@@ -19,7 +19,7 @@ const StudySessionCard = ({ study }) => {
         <img
           src={image}
           alt="Advanced English Communication"
-          className="rounded-t-lg"
+          className="rounded-t-lg w-96 h-56"
         />
       </figure>
       <div className="card-body p-4">

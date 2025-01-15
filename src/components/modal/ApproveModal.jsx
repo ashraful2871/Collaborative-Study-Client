@@ -80,7 +80,6 @@ const ApproveModal = ({ onClose, approve, refetch }) => {
               <span className="label-text font-medium">Session Fee</span>
             </label>
             <input
-              //defaultValue={_id}
               type="number"
               onChange={(e) => setAmount(e.target.value)}
               className="input input-bordered w-full"
@@ -90,7 +89,7 @@ const ApproveModal = ({ onClose, approve, refetch }) => {
 
         <div className="form-control mt-4">
           <button type="submit" className="btn btn-primary w-full">
-            Upload Material
+            Approve Session
           </button>
         </div>
       </form>

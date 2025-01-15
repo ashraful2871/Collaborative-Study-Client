@@ -24,7 +24,7 @@ const UploadMaterialsCard = ({ material }) => {
         <img
           src={material.image}
           alt="Study Session"
-          className="rounded-t-xl"
+          className="rounded-t-xl w-96 h-56"
         />
       </figure>
 
