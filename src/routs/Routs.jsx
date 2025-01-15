@@ -16,6 +16,7 @@ import ViewBookedSession from "../pages/student page/ViewBookedSession";
 import CreateNote from "../pages/student page/CreateNote";
 import ManagePersonalNotes from "../pages/student page/ManagePersonalNotes";
 import ViewStudyMaterials from "../pages/student page/ViewStudyMaterials";
+import SessionDetails from "../components/studey session section/SessionDetails";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
       {
         path: "/sign-up",
         element: <SignUp></SignUp>,
+      },
+      {
+        path: "/session-details/:id",
+        element: <SessionDetails></SessionDetails>,
       },
     ],
   },
