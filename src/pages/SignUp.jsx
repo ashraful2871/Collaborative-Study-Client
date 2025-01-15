@@ -75,8 +75,9 @@ const SignUp = () => {
         await updateUserProfile(name, photo);
         setUser({ ...result.user, photoURL: photo, displayName: name });
         const userInfo = {
-          email: result.user.email,
+          email: result?.user?.email,
           name: name,
+          photo: photo,
           role: "student",
         };
         console.log(userInfo.name);
@@ -98,6 +99,7 @@ const SignUp = () => {
         const userInfo = {
           email: result.user?.email,
           name: result.user?.displayName,
+          photo: result?.user?.photoURL,
           role: "student",
         };
         axios.post(`${import.meta.env.VITE_API_URL}/users`, userInfo);
