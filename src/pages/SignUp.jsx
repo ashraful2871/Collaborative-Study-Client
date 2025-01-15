@@ -78,7 +78,6 @@ const SignUp = () => {
           email: result?.user?.email,
           name: name,
           photo: photo,
-          role: "student",
         };
         console.log(userInfo.name);
         axios.post(`${import.meta.env.VITE_API_URL}/users`, userInfo);
@@ -100,7 +99,6 @@ const SignUp = () => {
           email: result.user?.email,
           name: result.user?.displayName,
           photo: result?.user?.photoURL,
-          role: "student",
         };
         axios.post(`${import.meta.env.VITE_API_URL}/users`, userInfo);
         navigate("/");
