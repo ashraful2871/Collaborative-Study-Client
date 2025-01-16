@@ -18,6 +18,7 @@ import ViewStudyMaterials from "../pages/student page/ViewStudyMaterials";
 import SessionDetails from "../components/studey session section/SessionDetails";
 import Privet from "../privet/privet";
 import BookedDetails from "../pages/student page/BookedDetails";
+import AdminRoute from "../privet/AdminRoute";
 export const router = createBrowserRouter([
   {
     path: "/",

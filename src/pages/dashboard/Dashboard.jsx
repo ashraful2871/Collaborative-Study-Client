@@ -3,16 +3,20 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 import TutorMenu from "../../components/sidebar/tutor/Tutormenu";
 import AdminMenu from "../../components/sidebar/admin/AdminMenu";
 import StudentMenu from "../../components/sidebar/admin/student/StudentMenu";
+import useRole from "../../hooks/useRole";
 
 const Dashboard = () => {
+  const [role, isLoading] = useRole();
+  console.log(role);
   return (
     <div className="flex">
       {/* Left Side: Sidebar Component */}
       <div className="space-y-5">
         <div className="w-64 p-4 h-full min-h-screen bg-orange-400">
-          <TutorMenu></TutorMenu>
-          <AdminMenu></AdminMenu>
-          <StudentMenu></StudentMenu>
+          {role === "admin" && <AdminMenu></AdminMenu>}
+          {role === "tutor" && <TutorMenu></TutorMenu>}
+
+          {role === "student" && <StudentMenu></StudentMenu>}
           <hr />
           <ul className="menu">
             <li>

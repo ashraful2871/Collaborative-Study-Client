@@ -54,6 +54,7 @@ const Login = () => {
           email: result.user?.email,
           name: result.user?.displayName,
           photo: result?.user?.photoURL,
+          role: "student",
         };
         axios.post(`${import.meta.env.VITE_API_URL}/users`, userInfo);
         toast.success("Successfully login");
