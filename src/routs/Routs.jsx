@@ -3,7 +3,6 @@ import Home from "../components/Home";
 import MainLayout from "../main layout/MainLayout";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
-import Privet from "../privet/privet";
 import Dashboard from "../pages/dashboard/Dashboard";
 import CreateStudy from "../pages/Tutor-page/CreateStudy";
 import ViewAllStudy from "../pages/Tutor-page/ViewAllStudy";
@@ -17,6 +16,7 @@ import CreateNote from "../pages/student page/CreateNote";
 import ManagePersonalNotes from "../pages/student page/ManagePersonalNotes";
 import ViewStudyMaterials from "../pages/student page/ViewStudyMaterials";
 import SessionDetails from "../components/studey session section/SessionDetails";
+import Privet from "../privet/privet";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -36,17 +36,17 @@ export const router = createBrowserRouter([
       },
       {
         path: "/session-details/:id",
-        element: <SessionDetails></SessionDetails>,
+        element: (
+          <Privet>
+            <SessionDetails></SessionDetails>
+          </Privet>
+        ),
       },
     ],
   },
   {
     path: "/dashboard",
-    element: (
-      <Privet>
-        <Dashboard></Dashboard>
-      </Privet>
-    ),
+    element: <Dashboard></Dashboard>,
     children: [
       //tutor routs only
       {

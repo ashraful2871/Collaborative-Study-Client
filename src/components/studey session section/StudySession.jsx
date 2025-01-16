@@ -1,19 +1,23 @@
 import React from "react";
 import AllStudySessionCard from "./AllStudySessionCard";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import Loading from "../Loading";
 
 const StudySession = () => {
-  const axiosSecure = useAxiosSecure();
-
-  const { data: allStudy = [] } = useQuery({
+  const { data: allStudy = [], isLoading } = useQuery({
     queryKey: ["all-approved-study-session"],
     queryFn: async () => {
-      const { data } = await axiosSecure.get("/all-approved-study-session");
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_URL}/all-approved-study-session`
+      );
       return data;
     },
   });
   console.log(allStudy);
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
 
   return (
     <div className="space-y-8">

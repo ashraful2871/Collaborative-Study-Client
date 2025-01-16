@@ -1,6 +1,6 @@
 import { Navigate, useLocation } from "react-router-dom";
-import Loading from "../components/Loading";
 import useAuth from "../hooks/useAuth";
+import Loading from "../components/Loading";
 
 const Privet = ({ children }) => {
   const { user, loading } = useAuth();

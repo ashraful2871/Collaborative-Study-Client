@@ -1,37 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
-import useAuth from "../hooks/useAuth";
 import axios from "axios";
 
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_upload_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const SignUp = () => {
   const { signUpUser, setUser, updateUserProfile, googleLogin } = useAuth();
   const navigate = useNavigate();
-  const handleSignUp = (e) => {
+  const [loading, setLoading] = useState(false);
+  const handleSignUp = async (e) => {
+    setLoading(true);
     e.preventDefault();
 
     const formData = new FormData(e.target);
-    // const data = Object.fromEntries(formData.entries());
     const name = formData.get("name");
     const email = formData.get("email");
-    const photo = formData.get("photo");
+    const image = formData.get("image");
     const password = formData.get("password");
-    const signUPInfo = { name, email, photo, password };
-    console.log(signUPInfo);
+
+    let imageUrl = "";
+    if (image) {
+      const imgFormData = new FormData();
+      imgFormData.append("image", image);
+
+      try {
+        const response = await axios.post(image_upload_api, imgFormData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        console.log(response.data.data.display_url);
+        if (response.data.success) {
+          imageUrl = response.data.data.display_url;
+        }
+      } catch (error) {
+        console.log(error);
+        toast.error("Image upload failed:", error);
+        return;
+      }
+    }
+
+    const signUPInfo = { name, email, photo: imageUrl, password };
+    // return console.log(signUPInfo);
 
     const hasUppercase = /[A-Z]/;
     const hasLowercase = /[a-z]/;
     const hasMinLength = /.{6,}/;
     const hasMinLengthName = /.{5,}/;
+
     if (!hasMinLengthName.test(name)) {
-      toast.error("Name at least 5 character or longer", {
-        style: {
-          borderRadius: "10px",
-          background: "#333",
-          color: "#fff",
-        },
-      });
+      toast.error("Name at least 5 character or longer");
       return;
     }
 
@@ -70,37 +91,37 @@ const SignUp = () => {
 
     //sign up user
     signUpUser(email, password)
-      .then(async (result) => {
+      .then((result) => {
         console.log(result.user);
-        await updateUserProfile(name, photo);
-        setUser({ ...result.user, photoURL: photo, displayName: name });
+        updateUserProfile(name, imageUrl);
+        setUser({ ...result.user, photoURL: imageUrl, displayName: name });
         const userInfo = {
           email: result?.user?.email,
           name: name,
-          photo: photo,
+          photo: imageUrl,
         };
         console.log(userInfo.name);
         axios.post(`${import.meta.env.VITE_API_URL}/users`, userInfo);
-
-        toast.success("Signed Up Successfully! Login Now");
-        navigate("/login");
+        toast.success("Signed Up Successfully");
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);
       });
+    setLoading(true);
   };
   const handleGoogleSignUP = () => {
     //google login
     googleLogin()
       .then((result) => {
         console.log(result.user);
-        toast.success("Successfully Signed Up");
         const userInfo = {
           email: result.user?.email,
           name: result.user?.displayName,
           photo: result?.user?.photoURL,
         };
         axios.post(`${import.meta.env.VITE_API_URL}/users`, userInfo);
+        toast.success("Successfully Signed Up");
         navigate("/");
       })
       .catch((error) => {
@@ -122,7 +143,7 @@ const SignUp = () => {
             </label>
             <input
               type="text"
-              placeholder="Name"
+              placeholder="email"
               name="name"
               className="input input-bordered"
               required
@@ -130,12 +151,12 @@ const SignUp = () => {
           </div>
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Photo URL</span>
+              <span className="label-text">Photo</span>
             </label>
             <input
-              type="url"
-              placeholder="Photo Url"
-              name="photo"
+              type="file"
+              placeholder="Photo"
+              name="image"
               className="input input-bordered"
               required
             />
@@ -165,9 +186,13 @@ const SignUp = () => {
             />
           </div>
           <div className="form-control mt-6">
-            <button className="btn bg-blue-700 hover:bg-blue-600 text-white font-bold rounded-lg transition duration-300 text-base">
-              Sign Up
-            </button>
+            {loading ? (
+              <button className="btn btn-primary w-full">
+                <span className="loading loading-spinner"></span>
+              </button>
+            ) : (
+              <button className="btn btn-primary">Sign Up </button>
+            )}
           </div>
         </form>
         <div>

@@ -10,25 +10,42 @@ const axiosSecure = axios.create({
 const useAxiosSecure = () => {
   const { signOutUser } = useAuth();
   const navigate = useNavigate();
-  axiosSecure.interceptors.request.use(
-    (config) => {
-      const token = localStorage.getItem("access-token");
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
+
+  useEffect(() => {
+    // Request interceptor to add the Authorization header
+    const requestInterceptor = axiosSecure.interceptors.request.use(
+      (config) => {
+        const token = localStorage.getItem("token"); // Ensure consistent key usage
+        if (token) {
+          config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+      },
+      (error) => Promise.reject(error)
+    );
+
+    // Response interceptor to handle errors
+    const responseInterceptor = axiosSecure.interceptors.response.use(
+      (response) => response,
+      async (error) => {
+        if (error.response?.status === 401 || error.response?.status === 403) {
+          try {
+            await signOutUser(); // Sign out user on unauthorized access
+            navigate("/login");
+          } catch (signOutError) {
+            console.error("Error during sign out:", signOutError);
+          }
+        }
+        return Promise.reject(error); // Always reject to handle errors in calling code
       }
-      return config;
-    },
-    (error) => Promise.reject(error)
-  );
-  axiosSecure.interceptors.response.use(
-    (res) => res,
-    (err) => {
-      if (err.response.status === 401 || err.response.status === 403) {
-        signOutUser().then(() => navigate("/login"));
-      }
-      return Promise.reject(err);
-    }
-  );
+    );
+
+    // Cleanup interceptors on unmount to prevent duplicates
+    return () => {
+      axiosSecure.interceptors.request.eject(requestInterceptor);
+      axiosSecure.interceptors.response.eject(responseInterceptor);
+    };
+  }, [signOutUser, navigate]);
 
   return axiosSecure;
 };

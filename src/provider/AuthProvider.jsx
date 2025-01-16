@@ -7,42 +7,80 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
-
-import { auth } from "../firebase/firebase.init";
-import { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import axios from "axios";
+import { auth } from "../firebase/firebase.init";
 
 export const AuthContext = createContext();
 
 const provider = new GoogleAuthProvider();
+
 const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
 
-  //sign Up user
-  const signUpUser = (email, password) => {
-    setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password);
+  // Sign up user
+  const signUpUser = async (email, password) => {
+    try {
+      setLoading(true);
+      const result = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      await handleToken(result.user.email);
+      return result;
+    } catch (error) {
+      console.error("Error signing up:", error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
   };
 
-  //sign In user
-  const signInUser = (email, password) => {
-    setLoading(true);
-    return signInWithEmailAndPassword(auth, email, password);
+  // Sign in user
+  const signInUser = async (email, password) => {
+    try {
+      setLoading(true);
+      const result = await signInWithEmailAndPassword(auth, email, password);
+      await handleToken(result.user.email);
+      return result;
+    } catch (error) {
+      console.error("Error signing in:", error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
   };
 
-  //google login
-  const googleLogin = () => {
-    setLoading(true);
-    return signInWithPopup(auth, provider);
+  // Google login
+  const googleLogin = async () => {
+    try {
+      setLoading(true);
+      const result = await signInWithPopup(auth, provider);
+      await handleToken(result.user.email);
+      return result;
+    } catch (error) {
+      console.error("Error with Google login:", error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
   };
 
-  //signOut
-  const signOutUser = () => {
-    return signOut(auth);
+  // Sign out user
+  const signOutUser = async () => {
+    try {
+      await signOut(auth);
+      setUser(null);
+      localStorage.removeItem("token");
+    } catch (error) {
+      console.error("Error signing out:", error);
+      throw error;
+    }
   };
 
-  //update profile
+  // Update user profile
   const updateUserProfile = (name, photo) => {
     return updateProfile(auth.currentUser, {
       displayName: name,
@@ -50,58 +88,37 @@ const AuthProvider = ({ children }) => {
     });
   };
 
-  //save user in db
-
-  const saveUserInDb = async (user) => {
-    const newUser = {
-      name: user?.displayName,
-      email: user?.email,
-      role: "student",
-    };
-
+  // Handle JWT token
+  const handleToken = async (email) => {
     try {
-      const { data } = axios.post(
-        `${import.meta.env.VITE_API_URL}/users`,
-        newUser
-      );
-      console.log(data);
+      const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/jwt`, {
+        email,
+      });
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+      }
     } catch (error) {
-      console.log(error);
+      console.error("Error generating token:", error);
     }
   };
 
-  //onAuthStateChanged
   useEffect(() => {
     const unSub = onAuthStateChanged(auth, async (currentUser) => {
       setLoading(true);
       if (currentUser?.email) {
         setUser(currentUser);
-
-        try {
-          // saveUserInDb(currentUser);
-          // Request JWT token from backend
-          const { data } = await axios.post(
-            `${import.meta.env.VITE_API_URL}/jwt`,
-            { email: currentUser.email }
-          );
-
-          if (data.token) {
-            localStorage.setItem("access-token", data.token); // Store token
-          }
-        } catch (error) {
-          console.error("Failed to fetch JWT token:", error);
-          localStorage.removeItem("access-token"); // Clear token on failure
+        const token = localStorage.getItem("token");
+        if (!token) {
+          await handleToken(currentUser.email);
         }
       } else {
-        // No user logged in, clear token
         setUser(null);
-        localStorage.removeItem("access-token");
+        localStorage.removeItem("token");
       }
       setLoading(false);
     });
-    return () => {
-      unSub();
-    };
+
+    return () => unSub();
   }, []);
 
   const authInfo = {
@@ -114,6 +131,7 @@ const AuthProvider = ({ children }) => {
     setUser,
     user,
   };
+
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );
