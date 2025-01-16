@@ -28,13 +28,32 @@ const SessionDetails = () => {
     registrationFee,
     registrationStart,
     registrationEnd,
+    _id,
   } = session;
 
   const start = new Date(registrationStart);
   const end = new Date(registrationEnd);
-
   const status =
     new Date() >= start && new Date() <= end ? "Ongoing" : "Closed";
+
+  //booked now
+
+  const bookedSessionData = {
+    image,
+    sessionTitle,
+    description,
+    classStart,
+    classEnd,
+    duration,
+    tutor,
+    sessionId: _id,
+    studentEmail: user?.email,
+    studentName: user?.displayName,
+  };
+  const handleBookedNow = async () => {
+    const { data } = await axiosSecure.post("/book-session", bookedSessionData);
+    console.log(data);
+  };
 
   if (isLoading) {
     return <Loading></Loading>;
@@ -100,7 +119,9 @@ const SessionDetails = () => {
             Registration Closed
           </button>
         ) : (
-          <button className="btn btn-primary">Book Now</button>
+          <button onClick={handleBookedNow} className="btn btn-primary">
+            Book Now
+          </button>
         )}
       </div>
     </div>
