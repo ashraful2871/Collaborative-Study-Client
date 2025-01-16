@@ -26,12 +26,21 @@ const SessionDetails = () => {
     duration,
     tutor,
     registrationFee,
+    registrationStart,
+    registrationEnd,
   } = session;
+
+  const start = new Date(registrationStart);
+  const end = new Date(registrationEnd);
+
+  const status =
+    new Date() >= start && new Date() <= end ? "Ongoing" : "Closed";
+
   if (isLoading) {
     return <Loading></Loading>;
   }
   return (
-    <div className="card bg-base-100 shadow-lg p-5">
+    <div className="card bg-base-100 shadow-lg p-5 space-y-4">
       {/* Image Section */}
       <div className="w-full mb-5">
         <img
@@ -46,9 +55,9 @@ const SessionDetails = () => {
       <p className="text-gray-600 mb-5">{description}</p>
 
       {/* Details Section */}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-4 space-y-4">
         {/* Column 1 */}
-        <div>
+        <div className="space-y-4">
           <p className="font-semibold">
             Student Name:{" "}
             <span className="font-normal">{user?.displayName}</span>
@@ -68,7 +77,7 @@ const SessionDetails = () => {
         </div>
 
         {/* Column 2 */}
-        <div>
+        <div className="space-y-4">
           <p className="font-semibold">
             Tutor Name: <span className="font-normal">{tutor?.name}</span>
           </p>
@@ -83,6 +92,16 @@ const SessionDetails = () => {
             <span className="font-normal">${registrationFee}</span>
           </p>
         </div>
+      </div>
+
+      <div className="card-actions justify-center ">
+        {status === "Closed" ? (
+          <button disabled className="btn btn-primary text-red-500">
+            Registration Closed
+          </button>
+        ) : (
+          <button className="btn btn-primary">Book Now</button>
+        )}
       </div>
     </div>
   );
