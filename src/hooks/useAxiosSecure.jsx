@@ -12,10 +12,9 @@ const useAxiosSecure = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Request interceptor to add the Authorization header
     const requestInterceptor = axiosSecure.interceptors.request.use(
       (config) => {
-        const token = localStorage.getItem("token"); // Ensure consistent key usage
+        const token = localStorage.getItem("token");
         if (token) {
           config.headers.Authorization = `Bearer ${token}`;
         }
@@ -24,23 +23,21 @@ const useAxiosSecure = () => {
       (error) => Promise.reject(error)
     );
 
-    // Response interceptor to handle errors
     const responseInterceptor = axiosSecure.interceptors.response.use(
       (response) => response,
       async (error) => {
         if (error.response?.status === 401 || error.response?.status === 403) {
           try {
-            await signOutUser(); // Sign out user on unauthorized access
+            await signOutUser();
             navigate("/login");
           } catch (signOutError) {
             console.error("Error during sign out:", signOutError);
           }
         }
-        return Promise.reject(error); // Always reject to handle errors in calling code
+        return Promise.reject(error);
       }
     );
 
-    // Cleanup interceptors on unmount to prevent duplicates
     return () => {
       axiosSecure.interceptors.request.eject(requestInterceptor);
       axiosSecure.interceptors.response.eject(responseInterceptor);
