@@ -8,7 +8,11 @@ import Loading from "../../components/Loading";
 const ManagePersonalNotes = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const { data: notes = [], isLoading } = useQuery({
+  const {
+    data: notes = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["note", user?.email],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/student/note/${user?.email}`);
@@ -27,6 +31,7 @@ const ManagePersonalNotes = () => {
           <ManagePersonalNoteCart
             key={note._id}
             note={note}
+            refetch={refetch}
           ></ManagePersonalNoteCart>
         ))}
       </div>
