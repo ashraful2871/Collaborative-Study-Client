@@ -107,11 +107,7 @@ const AllUsers = () => {
                   </div>
                 </td>
                 <td>{user.email}</td>
-                <td>
-                  {user.role === "admin" || user.role === "tutor"
-                    ? user.role
-                    : "student"}
-                </td>
+                <td>{user.role}</td>
                 <th>
                   <button
                     onClick={() => handleMAkeAdmin(user)}
