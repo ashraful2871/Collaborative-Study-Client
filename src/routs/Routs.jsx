@@ -17,6 +17,7 @@ import ManagePersonalNotes from "../pages/student page/ManagePersonalNotes";
 import ViewStudyMaterials from "../pages/student page/ViewStudyMaterials";
 import SessionDetails from "../components/studey session section/SessionDetails";
 import Privet from "../privet/privet";
+import BookedDetails from "../pages/student page/BookedDetails";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
             <SessionDetails></SessionDetails>
           </Privet>
         ),
+      },
+      {
+        path: "/booked-details/:id",
+        element: <BookedDetails></BookedDetails>,
       },
     ],
   },
@@ -96,6 +101,10 @@ export const router = createBrowserRouter([
       {
         path: "all-study-materials",
         element: <ViewStudyMaterials></ViewStudyMaterials>,
+      },
+      {
+        path: "booked-details/:id",
+        element: <BookedDetails></BookedDetails>,
       },
     ],
   },

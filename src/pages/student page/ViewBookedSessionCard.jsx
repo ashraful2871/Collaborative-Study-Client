@@ -1,7 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const ViewBookedSessionCard = ({ session }) => {
-  const { image, sessionTitle, description } = session;
+  const { image, sessionTitle, description, _id } = session;
   return (
     <div className="card bg-base-100 shadow-md w-full max-w-lg mx-auto flex flex-col">
       <figure className="h-64 w-full">
@@ -21,7 +22,9 @@ const ViewBookedSessionCard = ({ session }) => {
         </p>
 
         <div className="card-actions">
-          <button className="btn btn-outline btn-primary">Read More</button>
+          <Link to={`/dashboard/booked-details/${_id}`}>
+            <button className="btn btn-outline btn-primary">Read More</button>
+          </Link>
         </div>
       </div>
     </div>

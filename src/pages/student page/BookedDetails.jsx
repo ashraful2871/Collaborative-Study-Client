@@ -1,0 +1,147 @@
+import React from "react";
+import { useParams } from "react-router-dom";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "../../components/Loading";
+
+const BookedDetails = () => {
+  const { id } = useParams();
+  const axiosSecure = useAxiosSecure();
+  const { data: bookedData = {}, isLoading } = useQuery({
+    queryKey: ["booked-details", id],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(`/booked-details/${id}`);
+      return data;
+    },
+  });
+  console.log(bookedData);
+  const {
+    image,
+    sessionTitle,
+    description,
+    classStart,
+    classEnd,
+    duration,
+    tutor,
+    studentEmail,
+    studentName,
+  } = bookedData;
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
+  return (
+    <div>
+      <div className="min-h-screen bg-base-100 p-5">
+        {/* Header Section */}
+        <div className="text-center mb-10 ">
+          <div>
+            <h1 className="text-3xl font-bold">
+              <span className="text-black">View Your </span>
+              <span className="text-primary">Booked Study Session Details</span>
+            </h1>
+            <p className="text-gray-600 mt-3">
+              Feeling overwhelmed by upcoming exams and projects? Juggling a
+              busy schedule can make it tough to keep track of your booked study
+              sessions. This guide is here to help! Designed specifically for
+              students, it will show you how to easily view and manage all your
+              booked study sessions, ensuring you stay on top of your academic
+              commitments.
+            </p>
+          </div>
+          <div className="flex justify-center items-center mt-5">
+            <span className="animate-pulse h-3 w-3 bg-primary rounded-full mx-1"></span>
+            <span className="animate-pulse h-3 w-3 bg-primary rounded-full mx-1"></span>
+            <span className="animate-pulse h-3 w-3 bg-primary rounded-full mx-1"></span>
+          </div>
+        </div>
+
+        {/* Course Details Section */}
+        <div className="card bg-base-100 shadow-md p-5 mb-10">
+          {/* Image Section */}
+          <figure className="mb-5">
+            <img
+              src={image}
+              alt="Course"
+              className="rounded-lg mx-auto w-full h-[800px]"
+            />
+          </figure>
+          {/* Details Section */}
+          <div className="card-body">
+            <h2 className="card-title text-primary text-center">
+              {sessionTitle}
+            </h2>
+            <p className="text-gray-700 mb-5">{description}</p>
+            <div className="grid grid-cols-2 gap-4">
+              <p>
+                <strong>Student Name: </strong> {studentName}
+              </p>
+              <p>
+                <strong>Student Email: </strong>
+                {studentEmail}
+              </p>
+              <p>
+                <strong>Tutor Name: </strong> {tutor.name}
+              </p>
+              <p>
+                <strong>Tutor Email:</strong> {tutor.email}
+              </p>
+              <p>
+                <strong>Class Start Time: </strong> {classStart}
+              </p>
+              <p>
+                <strong>Class End Time: </strong> {classEnd}
+              </p>
+              <p>
+                <strong>Session Duration:</strong> {duration.hour} hours and{" "}
+                {duration.minute} minutes
+              </p>
+              {/* <p>
+                <strong>Max Participants:</strong> 500
+              </p> */}
+            </div>
+          </div>
+        </div>
+
+        {/* Review and Rating Form */}
+        <div className="card bg-base-100 shadow-md p-5">
+          <h3 className="text-xl font-bold text-center text-primary mb-5">
+            Please Provide Your Review & Rating
+          </h3>
+          <p className="text-gray-600 text-center mb-8">
+            Feeling overwhelmed by upcoming exams and projects? Juggling a busy
+            schedule can make it tough to keep track of your booked study
+            sessions. This guide is here to help!
+          </p>
+          <form className="grid grid-cols-1 gap-4 max-w-lg mx-auto w-full ">
+            <input
+              type="text"
+              placeholder="Student Name"
+              className="input input-bordered w-full bg-base-200"
+              defaultValue="Student Account"
+            />
+            <input
+              type="email"
+              placeholder="Student Email"
+              className="input input-bordered w-full bg-base-200"
+              defaultValue="student@gmail.com"
+            />
+            <textarea
+              placeholder="Your Review"
+              className="textarea textarea-bordered w-full bg-base-200"
+            ></textarea>
+            <input
+              type="number"
+              placeholder="Your Rating (out of 5)"
+              className="input input-bordered w-full bg-base-200"
+            />
+            <button className="btn btn-primary mt-4">
+              Send Review & Rating
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default BookedDetails;

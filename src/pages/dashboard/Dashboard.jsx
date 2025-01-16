@@ -9,7 +9,7 @@ const Dashboard = () => {
     <div className="flex">
       {/* Left Side: Sidebar Component */}
       <div className="space-y-5">
-        <div className="w-64 p-4 min-h-screen bg-orange-400">
+        <div className="w-64 p-4 h-full min-h-screen bg-orange-400">
           <TutorMenu></TutorMenu>
           <AdminMenu></AdminMenu>
           <StudentMenu></StudentMenu>
