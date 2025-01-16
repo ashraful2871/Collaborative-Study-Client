@@ -47,8 +47,18 @@ const ManagePersonalNoteCart = ({ note, refetch }) => {
     };
     console.log(noteData);
 
-    const { data } = await axiosSecure.patch(`update/note/${_id}`, noteData);
+    const { data } = await axiosSecure.patch(`/update/note/${_id}`, noteData);
     console.log(data);
+    setOpenModal(false);
+
+    if (data.modifiedCount > 0) {
+      refetch();
+      Swal.fire({
+        title: "Updated!",
+        text: "Your Note has been Updated.",
+        icon: "success",
+      });
+    }
   };
 
   const handleUpdate = () => {
