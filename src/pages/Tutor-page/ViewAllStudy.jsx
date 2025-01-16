@@ -24,7 +24,6 @@ const ViewAllStudy = () => {
   }
   return (
     <div>
-      <h2>view all study</h2>
       <div className="grid grid-cols-4 gap-5">
         {allStudy.map((study) => (
           <StudySessionCard key={study._id} study={study}></StudySessionCard>

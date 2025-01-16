@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../components/Loading";
+import ViewAllStudyMaterialCard from "./ViewAllStudyMaterialCard";
 
 const ViewStudyMaterials = () => {
   const { user } = useAuth();
@@ -23,6 +24,14 @@ const ViewStudyMaterials = () => {
   return (
     <div>
       <h2>i am ViewStudyMaterials</h2>
+      <div className="grid grid-cols-4 gap-5">
+        {materials.map((material) => (
+          <ViewAllStudyMaterialCard
+            key={material._id}
+            material={material}
+          ></ViewAllStudyMaterialCard>
+        ))}
+      </div>
     </div>
   );
 };

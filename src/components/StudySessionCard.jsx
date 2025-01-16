@@ -69,9 +69,9 @@ const StudySessionCard = ({ study }) => {
               Your study session request has been pending.
             </span>
           )}
-          {status === "Success" && (
+          {status === "Approved" && (
             <span className="text-sm font-semibold text-green-500">
-              Your study session request has been success.
+              Your study session request has been Approved.
             </span>
           )}
 
