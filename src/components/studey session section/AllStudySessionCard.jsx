@@ -27,10 +27,11 @@ const AllStudySessionCard = ({ study }) => {
             alt={sessionTitle}
           />
         </figure>
-        <div className="card-body flex flex-col flex-grow">
-          <h2 className="card-title">{sessionTitle}</h2>
-          <div className="font-semibold space-y-2 mb-2 flex-grow">
-            <p>{description}</p>
+        <div className="card-body space-y-5 flex flex-col flex-grow">
+          <div className="flex gap-7 items-center">
+            <div>
+              <h2 className="card-title">{sessionTitle}</h2>{" "}
+            </div>
             <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-sm font-bold shadow-md transition-colors">
               <span
                 className={`h-2 w-2 rounded-full ${
@@ -45,6 +46,10 @@ const AllStudySessionCard = ({ study }) => {
                 {status}
               </span>
             </div>
+          </div>
+
+          <div className="font-semibold space-y-2 mb-2 flex-grow">
+            <p>{description}</p>
           </div>
           <div className="card-actions justify-end mt-auto">
             <Link to={`/session-details/${_id}`}>
