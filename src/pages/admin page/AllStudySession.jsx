@@ -50,7 +50,10 @@ const AllStudySession = () => {
       ></PendingSession>
 
       {/* approved session */}
-      <ApprovedSession approvedSession={approvedSession}></ApprovedSession>
+      <ApprovedSession
+        approvedSession={approvedSession}
+        refetch={refetch}
+      ></ApprovedSession>
 
       {/* rejected session */}
       <RejectedSession rejectedSession={rejectedSession}></RejectedSession>

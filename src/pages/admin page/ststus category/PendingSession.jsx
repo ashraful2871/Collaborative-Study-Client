@@ -23,12 +23,14 @@ const PendingSession = ({ pendingSession, refetch }) => {
           status: "Rejected",
         });
         console.log(data);
-        refetch();
-        Swal.fire({
-          title: "Reject!",
-          text: "Tutor status has been Rejected.",
-          icon: "success",
-        });
+        if (data.modifiedCount > 0) {
+          refetch();
+          Swal.fire({
+            title: "Reject!",
+            text: "Tutor status has been Rejected.",
+            icon: "success",
+          });
+        }
       }
     });
   };
