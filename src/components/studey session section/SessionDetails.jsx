@@ -4,11 +4,13 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../hooks/useAuth";
 import Loading from "../Loading";
+import useRole from "../../hooks/useRole";
 
 const SessionDetails = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const { id } = useParams();
+  const [role] = useRole();
   const { data: session = {}, isLoading } = useQuery({
     queryKey: ["/session-details/:id"],
     queryFn: async () => {
@@ -117,6 +119,10 @@ const SessionDetails = () => {
         {status === "Closed" ? (
           <button disabled className="btn btn-primary text-red-500">
             Registration Closed
+          </button>
+        ) : role === "admin" || role === "tutor" ? (
+          <button disabled className="btn btn-primary">
+            Book Now
           </button>
         ) : (
           <button onClick={handleBookedNow} className="btn btn-primary">

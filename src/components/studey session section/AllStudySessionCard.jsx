@@ -23,7 +23,7 @@ const AllStudySessionCard = ({ study }) => {
         <figure>
           <img
             src={image}
-            className="w-full h-48 object-cover"
+            className="w-full h-56 object-cover"
             alt={sessionTitle}
           />
         </figure>
