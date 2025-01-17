@@ -13,11 +13,11 @@ const ApprovedSessionTableRow = ({ session, idx, refetch }) => {
     setOpenModal(true);
   };
 
+  //update status by admin
   const handleUpdateStatus = async (id, status) => {
     const { data } = await axiosSecure.patch(`/change-status/${id}`, {
       status: status,
     });
-    console.log(data);
     if (data.modifiedCount > 0) {
       refetch();
       Swal.fire({
@@ -27,6 +27,36 @@ const ApprovedSessionTableRow = ({ session, idx, refetch }) => {
       });
     }
     setOpenModal(false);
+  };
+
+  // delete session by admin
+  const handleDelete = async (id) => {
+    console.log(id);
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to change this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const { data } = await axiosSecure.delete(
+          `/delete/admin/session/${id}`
+        );
+        console.log(data);
+        if (data.deletedCount > 0) {
+          refetch();
+          Swal.fire({
+            title: "Delete!",
+            text: "Tutor Session has been Deleted.",
+            icon: "success",
+          });
+        }
+      }
+    });
   };
 
   const handleCloseModal = () => {
@@ -65,7 +95,10 @@ const ApprovedSessionTableRow = ({ session, idx, refetch }) => {
             >
               <FaEdit /> Update
             </button>
-            <button className="bg-red-500 text-white px-3 py-1 rounded text-sm hover:bg-red-600 transition-all flex gap-1 items-center shadow-md disabled:bg-gray-500 disabled:cursor-not-allowed">
+            <button
+              onClick={() => handleDelete(session._id)}
+              className="bg-red-500 text-white px-3 py-1 rounded text-sm hover:bg-red-600 transition-all flex gap-1 items-center shadow-md disabled:bg-gray-500 disabled:cursor-not-allowed"
+            >
               <FaTrashRestoreAlt /> Delete
             </button>
           </div>
