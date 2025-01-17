@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { FaEdit, FaTrashRestoreAlt } from "react-icons/fa";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 
 const ApprovedSessionTableRow = ({ session, idx, refetch }) => {
