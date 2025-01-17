@@ -3,10 +3,12 @@ import { useParams } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../components/Loading";
+import useAuth from "../../hooks/useAuth";
 
 const BookedDetails = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
   const { data: bookedData = {}, isLoading } = useQuery({
     queryKey: ["booked-details", id],
     queryFn: async () => {
@@ -25,7 +27,24 @@ const BookedDetails = () => {
     tutor,
     studentEmail,
     studentName,
+    sessionId,
   } = bookedData;
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const name = formData.get("name");
+    const email = formData.get("email");
+    const rating = formData.get("rating");
+    const review = formData.get("review");
+
+    const reviewData = { name, email, rating, review, sessionId };
+    console.log(reviewData);
+
+    const { data } = await axiosSecure.post("/reviews", reviewData);
+    console.log(data);
+  };
+
   if (isLoading) {
     return <Loading></Loading>;
   }
@@ -112,28 +131,65 @@ const BookedDetails = () => {
             schedule can make it tough to keep track of your booked study
             sessions. This guide is here to help!
           </p>
-          <form className="grid grid-cols-1 gap-4 max-w-lg mx-auto w-full ">
-            <input
-              type="text"
-              placeholder="Student Name"
-              className="input input-bordered w-full bg-base-200"
-              defaultValue="Student Account"
-            />
-            <input
-              type="email"
-              placeholder="Student Email"
-              className="input input-bordered w-full bg-base-200"
-              defaultValue="student@gmail.com"
-            />
-            <textarea
-              placeholder="Your Review"
-              className="textarea textarea-bordered w-full bg-base-200"
-            ></textarea>
-            <input
-              type="number"
-              placeholder="Your Rating (out of 5)"
-              className="input input-bordered w-full bg-base-200"
-            />
+          <form
+            onSubmit={handleSubmit}
+            className="grid grid-cols-1 gap-4 max-w-lg mx-auto w-full "
+          >
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-base font-semibold">
+                  Name:
+                </span>
+              </label>
+              <input
+                type="text"
+                name="name"
+                placeholder="Student Name"
+                className="input input-bordered w-full bg-base-200"
+                defaultValue={user?.displayName}
+                readOnly
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-base font-semibold">
+                  Email:
+                </span>
+              </label>
+              <input
+                type="email"
+                name="email"
+                placeholder="Student Email"
+                className="input input-bordered w-full bg-base-200"
+                defaultValue={user?.email}
+                readOnly
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-base font-semibold">
+                  Rating:
+                </span>
+              </label>
+              <input
+                type="number"
+                name="rating"
+                placeholder="Your Rating (out of 5)"
+                className="input input-bordered w-full bg-base-200"
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-base font-semibold">
+                  Review:
+                </span>
+              </label>
+              <textarea
+                placeholder="Your Review"
+                name="review"
+                className="textarea textarea-bordered w-full h-24 bg-base-200"
+              ></textarea>
+            </div>
             <button className="btn btn-primary mt-4">
               Send Review & Rating
             </button>
