@@ -37,8 +37,9 @@ const BookedDetails = () => {
     const email = formData.get("email");
     const rating = formData.get("rating");
     const review = formData.get("review");
+    const photo = user?.photoURL;
 
-    const reviewData = { name, email, rating, review, sessionId };
+    const reviewData = { name, email, photo, rating, review, sessionId };
     console.log(reviewData);
 
     const { data } = await axiosSecure.post("/reviews", reviewData);
