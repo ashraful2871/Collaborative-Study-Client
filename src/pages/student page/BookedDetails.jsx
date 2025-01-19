@@ -75,9 +75,7 @@ const BookedDetails = () => {
           </div>
         </div>
 
-        {/* Course Details Section */}
         <div className="card bg-base-100 shadow-md p-5 mb-10">
-          {/* Image Section */}
           <figure className="mb-5">
             <img
               src={image}
@@ -85,7 +83,7 @@ const BookedDetails = () => {
               className="rounded-lg mx-auto w-full h-[800px]"
             />
           </figure>
-          {/* Details Section */}
+
           <div className="card-body">
             <h2 className="card-title text-primary text-center">
               {sessionTitle}
@@ -115,9 +113,6 @@ const BookedDetails = () => {
                 <strong>Session Duration:</strong> {duration.hour} hours and{" "}
                 {duration.minute} minutes
               </p>
-              {/* <p>
-                <strong>Max Participants:</strong> 500
-              </p> */}
             </div>
           </div>
         </div>

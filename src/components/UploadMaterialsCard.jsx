@@ -19,7 +19,6 @@ const UploadMaterialsCard = ({ material }) => {
 
   return (
     <div className="card w-full bg-base-100 shadow-xl">
-      {/* Card Image */}
       <figure>
         <img
           src={material.image}
@@ -29,13 +28,10 @@ const UploadMaterialsCard = ({ material }) => {
       </figure>
 
       <div className="card-body">
-        {/* Status */}
         <span className="badge badge-success">{material.status}</span>
 
-        {/* Title */}
         <h2 className="card-title">{material.sessionTitle}</h2>
 
-        {/* Upload Button */}
         <div className="card-actions justify-start">
           <button className="btn btn-primary" onClick={openModal}>
             Upload Material
@@ -43,7 +39,6 @@ const UploadMaterialsCard = ({ material }) => {
         </div>
       </div>
 
-      {/* Render Modal */}
       {selectedMaterial && (
         <UploadMaterialModal
           material={selectedMaterial}
