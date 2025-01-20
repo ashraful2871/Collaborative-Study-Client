@@ -95,6 +95,7 @@ const AllUsers = () => {
                     <div className="avatar">
                       <div className="mask mask-squircle h-12 w-12">
                         <img
+                          referrerPolicy="no-referrer"
                           className="rounded-full"
                           src={user.photo}
                           alt="Avatar Tailwind CSS Component"
