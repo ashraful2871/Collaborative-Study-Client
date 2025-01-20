@@ -18,6 +18,7 @@ import ViewStudyMaterials from "../pages/student page/ViewStudyMaterials";
 import SessionDetails from "../components/studey session section/SessionDetails";
 import Privet from "../privet/privet";
 import BookedDetails from "../pages/student page/BookedDetails";
+import Payment from "../components/studey session section/payment/Payment";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -46,6 +47,10 @@ export const router = createBrowserRouter([
       {
         path: "/booked-details/:id",
         element: <BookedDetails></BookedDetails>,
+      },
+      {
+        path: "/payment/:id",
+        element: <Payment></Payment>,
       },
     ],
   },

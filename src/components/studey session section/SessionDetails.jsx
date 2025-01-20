@@ -57,6 +57,7 @@ const SessionDetails = () => {
     classEnd,
     duration,
     tutor,
+    registrationFee,
     sessionId: _id,
     studentEmail: user?.email,
     studentName: user?.displayName,
@@ -173,7 +174,7 @@ const SessionDetails = () => {
             Book Now
           </button>
         ) : registrationFee > 0 ? (
-          <Link to="/payment">
+          <Link to={`/payment/${_id}`}>
             {" "}
             <button className="btn btn-primary">Book Now</button>
           </Link>
