@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const CreateNote = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     const formData = new FormData(e.target);
     const studentEmail = user?.email;
@@ -20,6 +25,9 @@ const CreateNote = () => {
 
     const { data } = await axiosSecure.post("/crete-note", noteData);
     console.log(data);
+    toast.success("/Note Create successfully");
+    setLoading(false);
+    navigate("/dashboard/personal-note");
   };
   return (
     <div className="flex justify-center  min-h-screen bg-base-100">
@@ -69,7 +77,13 @@ const CreateNote = () => {
             ></textarea>
           </div>
           <div className="text-center">
-            <button className="btn btn-primary w-full">Create Note</button>
+            {loading ? (
+              <button className="btn btn-primary">
+                <span className="loading loading-spinner"></span>
+              </button>
+            ) : (
+              <button className="btn btn-primary w-full">Create Note</button>
+            )}
           </div>
         </form>
       </div>

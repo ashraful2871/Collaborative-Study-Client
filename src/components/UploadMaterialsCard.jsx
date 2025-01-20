@@ -23,14 +23,14 @@ const UploadMaterialsCard = ({ material }) => {
         <img
           src={material.image}
           alt="Study Session"
-          className="rounded-t-xl w-96 h-56"
+          className="rounded-t-xl w-96 h-48"
         />
       </figure>
 
       <div className="card-body">
         <span className="badge badge-success">{material.status}</span>
 
-        <h2 className="card-title">{material.sessionTitle}</h2>
+        <h2 className="card-title flex-grow">{material.sessionTitle}</h2>
 
         <div className="card-actions justify-start">
           <button className="btn btn-primary" onClick={openModal}>

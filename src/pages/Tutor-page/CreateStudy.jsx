@@ -82,10 +82,10 @@ const CreateStudy = () => {
       <h2 className="text-center text-4xl font-semibold">
         Create Study Session
       </h2>
-      <div className="card bg-base-100 w-full shrink-0 shadow-2xl">
+      <div className="card bg-base-100 w-full  border-2">
         <form
           onSubmit={handleSubmit}
-          className="card-body grid grid-cols-2 gap-5"
+          className="card-body grid grid-cols-2 gap-5 border-2 w-full"
         >
           <div className="form-control">
             <label className="label">

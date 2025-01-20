@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import "../form/checkOutForm.css";
 import axios from "axios";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useAuth from "../../../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const CheckoutForm = ({ sessionPayment }) => {
+  const navigate = useNavigate();
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const [processing, setProcessing] = useState(false);
 
   const {
     registrationFee,
@@ -40,6 +44,7 @@ const CheckoutForm = ({ sessionPayment }) => {
   const elements = useElements();
 
   const handleSubmit = async (event) => {
+    setProcessing(true);
     // Block native form submission.
     event.preventDefault();
 
@@ -87,13 +92,17 @@ const CheckoutForm = ({ sessionPayment }) => {
     if (confirmError) {
       console.log("[Error during confirmation]", confirmError);
       //setPaymentStatus("Payment failed. Please try again.");
+      toast.error("Payment failed. Please try again.");
     } else if (paymentIntent.status === "succeeded") {
-      console.log("Payment successful:", paymentIntent);
+      //   console.log("Payment successful:", paymentIntent);
       const { data } = await axiosSecure.post(
         "/book-session",
         bookedSessionData
       );
-      console.log(data);
+      //   console.log(data);
+      toast.success("Payment successful");
+      navigate("/dashboard/view-book-session");
+      setProcessing(false);
     }
   };
 
@@ -115,9 +124,19 @@ const CheckoutForm = ({ sessionPayment }) => {
           },
         }}
       />
-      <button type="submit" disabled={!stripe}>
-        Pay
-      </button>
+      {processing ? (
+        <button className="btn btn-primary">
+          <span className="loading loading-spinner"></span>
+        </button>
+      ) : (
+        <button
+          disabled={!stripe || processing}
+          className="btn btn-primary"
+          type="submit"
+        >
+          Pay
+        </button>
+      )}
     </form>
   );
 };

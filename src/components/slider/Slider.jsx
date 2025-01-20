@@ -22,8 +22,22 @@ const Slider = () => {
         }}
         navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
-        className="mySwiper h-[400px]  border-2 border-red-600 rounded-xl text-center"
+        className="mySwiper h-[500px]  border-2 border-red-600 rounded-xl text-center"
       >
+        <SwiperSlide>
+          <img
+            className="w-full"
+            src="https://i.ibb.co.com/kGBfJ1v/Red-and-Black-Modern-Business-Development-Strategy-Banner-1.png"
+            alt=""
+          />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img
+            className="w-full object-cover"
+            src="https://i.ibb.co.com/5r7HPsV/Yellow-Design-Tutorial-Youtube-Thumbnail.png"
+            alt=""
+          />
+        </SwiperSlide>
         <SwiperSlide>
           <img
             className="w-full"
@@ -31,14 +45,13 @@ const Slider = () => {
             alt=""
           />
         </SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
-        <SwiperSlide>Slide 6</SwiperSlide>
-        <SwiperSlide>Slide 7</SwiperSlide>
-        <SwiperSlide>Slide 8</SwiperSlide>
-        <SwiperSlide>Slide 9</SwiperSlide>
+        <SwiperSlide>
+          <img
+            className="w-full"
+            src="https://i.ibb.co.com/JdrGNRm/home.jpg"
+            alt=""
+          />
+        </SwiperSlide>
       </Swiper>
     </>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../hooks/useAuth";
@@ -13,6 +13,7 @@ const SessionDetails = () => {
   const { user } = useAuth();
   const { id } = useParams();
   const [role] = useRole();
+  const navigate = useNavigate();
   const { data: session = {}, isLoading } = useQuery({
     queryKey: ["session-details", id],
     queryFn: async () => {
@@ -64,7 +65,8 @@ const SessionDetails = () => {
   };
   const handleBookedNow = async () => {
     const { data } = await axiosSecure.post("/book-session", bookedSessionData);
-    console.log(data);
+    // console.log(data);
+    navigate("/dashboard/view-book-session");
   };
 
   if (isLoading) {
