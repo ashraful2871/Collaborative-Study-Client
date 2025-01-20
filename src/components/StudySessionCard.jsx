@@ -117,10 +117,10 @@ const StudySessionCard = ({ study, refetch }) => {
                 Your study session request has been Rejected.
               </span>
               <p className="font-semibold text-red-500">
-                <small>Reason:{reason}</small>
+                <small>Reason: {reason}</small>
               </p>
               <p className="font-semibold text-red-500">
-                <small>Feedback:{feedback}</small>
+                <small>Feedback: {feedback}</small>
               </p>
             </div>
           )}

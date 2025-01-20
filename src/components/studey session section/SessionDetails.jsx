@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../hooks/useAuth";
@@ -14,7 +14,7 @@ const SessionDetails = () => {
   const { id } = useParams();
   const [role] = useRole();
   const { data: session = {}, isLoading } = useQuery({
-    queryKey: ["/session-details", id],
+    queryKey: ["session-details", id],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/session-details/${id}`);
       return data;
@@ -43,14 +43,6 @@ const SessionDetails = () => {
     new Date() >= start && new Date() <= end ? "Ongoing" : "Closed";
 
   //calculate average rating
-  // if (reviews.length > 0) {
-  //   const totalRating = reviews.reduce(
-  //     (sum, review) => sum + Number(review.rating),
-  //     0
-  //   );
-  //   const averageRating = totalRating / reviews.length;
-  // }
-
   const averageRating =
     reviews?.length > 0
       ? reviews.reduce((sum, review) => sum + Number(review.rating), 0)
@@ -180,9 +172,14 @@ const SessionDetails = () => {
           <button disabled className="btn btn-primary">
             Book Now
           </button>
+        ) : registrationFee > 0 ? (
+          <Link to="/payment">
+            {" "}
+            <button className="btn btn-primary">Book Now</button>
+          </Link>
         ) : (
           <button onClick={handleBookedNow} className="btn btn-primary">
-            Book Now
+            Book For Free
           </button>
         )}
       </div>

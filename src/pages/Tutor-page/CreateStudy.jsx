@@ -218,6 +218,7 @@ const CreateStudy = () => {
             </label>
             <input
               value={0}
+              readOnly
               type="number"
               name="registration-fee"
               placeholder="registration-fee"
