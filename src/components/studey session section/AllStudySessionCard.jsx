@@ -19,7 +19,7 @@ const AllStudySessionCard = ({ study }) => {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="card bg-base-100 shadow-xl flex flex-col h-full">
+      <div className="card bg-base-100 border-2 flex flex-col h-full">
         <figure>
           <img
             src={image}

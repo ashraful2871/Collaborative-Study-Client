@@ -26,16 +26,18 @@ const AllUsers = () => {
       confirmButtonText: "Yes, Admin it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        axiosSecure.patch(`/user/role/${user?.email}`, {
+        const { data } = await axiosSecure.patch(`/user/role/${user?.email}`, {
           role: "admin",
         });
 
         refetch();
-        Swal.fire({
-          title: "Success!",
-          text: `${user.name} is admin now`,
-          icon: "success",
-        });
+        if (data.modifiedCount > 0) {
+          Swal.fire({
+            title: "Success!",
+            text: `${user.name} is tutor now`,
+            icon: "success",
+          });
+        }
       }
     });
   };
@@ -52,16 +54,18 @@ const AllUsers = () => {
       confirmButtonText: "Yes, Tutor it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        axiosSecure.patch(`/user/role/${user?.email}`, {
+        const { data } = await axiosSecure.patch(`/user/role/${user?.email}`, {
           role: "tutor",
         });
 
         refetch();
-        Swal.fire({
-          title: "Success!",
-          text: `${user.name} is tutor now`,
-          icon: "success",
-        });
+        if (data.modifiedCount > 0) {
+          Swal.fire({
+            title: "Success!",
+            text: `${user.name} is tutor now`,
+            icon: "success",
+          });
+        }
       }
     });
   };
