@@ -20,6 +20,7 @@ import Privet from "../privet/privet";
 import BookedDetails from "../pages/student page/BookedDetails";
 import Payment from "../components/studey session section/payment/Payment";
 import AdminRoute from "../privet/AdminRoute";
+import TutorRoute from "../privet/TutorRoute";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -47,34 +48,62 @@ export const router = createBrowserRouter([
       },
       {
         path: "/booked-details/:id",
-        element: <BookedDetails></BookedDetails>,
+        element: (
+          <Privet>
+            <BookedDetails></BookedDetails>
+          </Privet>
+        ),
       },
       {
         path: "/payment/:id",
-        element: <Payment></Payment>,
+        element: (
+          <Privet>
+            <Payment></Payment>
+          </Privet>
+        ),
       },
     ],
   },
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
+    element: (
+      <Privet>
+        <Dashboard></Dashboard>
+      </Privet>
+    ),
     children: [
       //tutor routs only
       {
         path: "create-study",
-        element: <CreateStudy></CreateStudy>,
+        element: (
+          <TutorRoute>
+            <CreateStudy></CreateStudy>
+          </TutorRoute>
+        ),
       },
       {
         path: "view-all-study",
-        element: <ViewAllStudy></ViewAllStudy>,
+        element: (
+          <TutorRoute>
+            <ViewAllStudy></ViewAllStudy>
+          </TutorRoute>
+        ),
       },
       {
         path: "upload-materials",
-        element: <UploadMaterials></UploadMaterials>,
+        element: (
+          <TutorRoute>
+            <UploadMaterials></UploadMaterials>
+          </TutorRoute>
+        ),
       },
       {
         path: "view-all-materials",
-        element: <ViewAllMaterials></ViewAllMaterials>,
+        element: (
+          <TutorRoute>
+            <ViewAllMaterials></ViewAllMaterials>,
+          </TutorRoute>
+        ),
       },
 
       //admin routs only
