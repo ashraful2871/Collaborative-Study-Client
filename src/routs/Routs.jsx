@@ -19,6 +19,7 @@ import SessionDetails from "../components/studey session section/SessionDetails"
 import Privet from "../privet/privet";
 import BookedDetails from "../pages/student page/BookedDetails";
 import Payment from "../components/studey session section/payment/Payment";
+import AdminRoute from "../privet/AdminRoute";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -79,15 +80,28 @@ export const router = createBrowserRouter([
       //admin routs only
       {
         path: "all-users",
-        element: <AllUsers></AllUsers>,
+        element: (
+          <AdminRoute>
+            <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
       },
       {
         path: "all-study-session",
-        element: <AllStudySession></AllStudySession>,
+        element: (
+          <AdminRoute>
+            <AllStudySession></AllStudySession>
+          </AdminRoute>
+        ),
       },
       {
         path: "all-materials",
-        element: <AllMaterials></AllMaterials>,
+
+        element: (
+          <AdminRoute>
+            <AllMaterials></AllMaterials>
+          </AdminRoute>
+        ),
       },
 
       //student routs only
