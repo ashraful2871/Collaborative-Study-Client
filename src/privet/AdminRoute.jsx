@@ -11,7 +11,15 @@ const AdminRoute = ({ children }) => {
   if (role === "admin") {
     return children;
   }
-  return <Navigate to="/dashboard" replace="true"></Navigate>;
+  return (
+    <Navigate
+      to={
+        (role === "student" && "/dashboard/view-book-session") ||
+        (role === "tutor" && "/dashboard/view-all-study")
+      }
+      replace="true"
+    ></Navigate>
+  );
 };
 
 export default AdminRoute;
