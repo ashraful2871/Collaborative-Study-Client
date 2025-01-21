@@ -11,7 +11,15 @@ const TutorRoute = ({ children }) => {
   if (role === "tutor") {
     return children;
   }
-  return <Navigate to="/dashboard" replace="true"></Navigate>;
+  return (
+    <Navigate
+      to={
+        (role === "admin" && "/dashboard/all-users") ||
+        (role === "student" && "/dashboard/view-book-session")
+      }
+      replace="true"
+    ></Navigate>
+  );
 };
 
 export default TutorRoute;
