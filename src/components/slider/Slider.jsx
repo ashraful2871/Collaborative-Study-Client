@@ -22,7 +22,7 @@ const Slider = () => {
         }}
         navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
-        className="mySwiper h-[500px] rounded-xl text-center"
+        className="mySwiper md:h-[500px] rounded-xl text-center"
       >
         <SwiperSlide>
           <img
@@ -41,7 +41,7 @@ const Slider = () => {
 
         <SwiperSlide>
           <img
-            className="w-full h-full"
+            className="w-full "
             src="https://i.ibb.co.com/tq3Rdk8/Study-Habits-Education-Presentation-in-Black-Blue-and-Yellow-Illustrative-Style-1.png"
             alt=""
           />

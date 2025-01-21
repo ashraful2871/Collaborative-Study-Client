@@ -172,6 +172,7 @@ const BookedDetails = () => {
                 name="rating"
                 placeholder="Your Rating (out of 5)"
                 className="input input-bordered w-full bg-base-200"
+                required
               />
             </div>
             <div className="form-control">
@@ -184,9 +185,10 @@ const BookedDetails = () => {
                 placeholder="Your Review"
                 name="review"
                 className="textarea textarea-bordered w-full h-24 bg-base-200"
+                required
               ></textarea>
             </div>
-            <button className="btn btn-primary mt-4">
+            <button className="btn btn-primary mt-4 bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg ">
               Send Review & Rating
             </button>
           </form>

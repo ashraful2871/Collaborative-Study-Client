@@ -50,7 +50,10 @@ const ViewAllStudyMaterialCard = ({ material }) => {
           <h2 className="card-title">{sessionTitle}</h2>
 
           <div className="flex justify-between mt-2">
-            <button className="btn btn-primary" onClick={handleViewModal}>
+            <button
+              className="btn btn-primary bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg"
+              onClick={handleViewModal}
+            >
               View Material
             </button>
           </div>

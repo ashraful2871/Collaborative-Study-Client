@@ -7,6 +7,7 @@ import Loading from "../Loading";
 import useRole from "../../hooks/useRole";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
+import toast from "react-hot-toast";
 
 const SessionDetails = () => {
   const axiosSecure = useAxiosSecure();
@@ -66,6 +67,7 @@ const SessionDetails = () => {
   const handleBookedNow = async () => {
     const { data } = await axiosSecure.post("/book-session", bookedSessionData);
     // console.log(data);
+    toast.success("Registration Successfully");
     navigate("/dashboard/view-book-session");
   };
 
@@ -138,36 +140,43 @@ const SessionDetails = () => {
         </div>
       </div>
 
-      <div>
+      <div className="mt-8">
         <h2 className="text-center font-semibold text-3xl text-blue-500">
           Reviews
         </h2>
-        {reviews.map((review) => (
-          <div key={review._id} className="flex items-center gap-3 mt-5">
-            <div className="avatar">
-              <div className="rounded-full h-12 w-12 ">
+        <div className="flex justify-center mt-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-5 w-full max-w-4xl rounded-lg">
+            {reviews?.map((review) => (
+              <div
+                key={review._id}
+                className="flex items-start gap-4 border-b-2 pb-4 mb-4"
+              >
+                {/* User Avatar */}
                 <img
+                  className="rounded-full h-12 w-12"
                   referrerPolicy="no-referrer"
                   src={review.photo}
-                  alt="Avatar Tailwind CSS Component"
+                  alt={`${review.name}'s avatar`}
                 />
+
+                {/* Review Details */}
+                <div>
+                  <div className="font-bold text-lg">{review.name}</div>
+                  <p className="text-base flex gap-2 items-center">
+                    Rating:{" "}
+                    <Rating
+                      style={{ maxWidth: 100 }}
+                      value={review.rating}
+                      readOnly
+                    />{" "}
+                    ({review.rating})
+                  </p>
+                  <p className="text-base">Review: {review.review}</p>
+                </div>
               </div>
-            </div>
-            <div>
-              <div className="font-bold text-lg">{review.name}</div>
-              <p className="text-base flex gap-2 items-center">
-                Rating:{" "}
-                <Rating
-                  style={{ maxWidth: 100 }}
-                  value={review.rating}
-                  readOnly
-                />{" "}
-                ( {review.rating})
-              </p>
-              <p className="text-base ">Review: {review.review}</p>
-            </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
 
       <div className="card-actions justify-center ">
@@ -182,10 +191,15 @@ const SessionDetails = () => {
         ) : registrationFee > 0 ? (
           <Link to={`/payment/${_id}`}>
             {" "}
-            <button className="btn btn-primary">Book Now</button>
+            <button className="btn btn-primary bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg">
+              Book Now
+            </button>
           </Link>
         ) : (
-          <button onClick={handleBookedNow} className="btn btn-primary">
+          <button
+            onClick={handleBookedNow}
+            className="btn btn-primary bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg"
+          >
             Book For Free
           </button>
         )}

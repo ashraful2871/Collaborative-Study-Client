@@ -63,6 +63,7 @@ const CreateNote = () => {
               name="title"
               placeholder="Note Title"
               className="input input-bordered w-full bg-gray-100"
+              required
             />
           </div>
           <div className="mb-6">
@@ -74,6 +75,7 @@ const CreateNote = () => {
               name="description"
               className="textarea textarea-bordered w-full bg-gray-100"
               rows="4"
+              required
             ></textarea>
           </div>
           <div className="text-center">
@@ -82,7 +84,9 @@ const CreateNote = () => {
                 <span className="loading loading-spinner"></span>
               </button>
             ) : (
-              <button className="btn btn-primary w-full">Create Note</button>
+              <button className="btn btn-primary w-full bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg">
+                Create Note
+              </button>
             )}
           </div>
         </form>

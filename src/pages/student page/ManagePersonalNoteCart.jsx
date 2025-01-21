@@ -142,7 +142,10 @@ const ManagePersonalNoteCart = ({ note, refetch }) => {
             </div>
 
             <div className="form-control mt-4">
-              <button type="submit" className="btn btn-primary w-full">
+              <button
+                type="submit"
+                className="btn btn-primary w-full bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg"
+              >
                 Update Note
               </button>
             </div>

@@ -26,7 +26,9 @@ const ViewBookedSessionCard = ({ session }) => {
 
         <div className="card-actions">
           <Link to={`/dashboard/booked-details/${_id}`}>
-            <button className="btn btn-outline btn-primary">Read More</button>
+            <button className="btn btn-primary bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg">
+              Read More
+            </button>
           </Link>
         </div>
       </div>
