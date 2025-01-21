@@ -21,6 +21,7 @@ import BookedDetails from "../pages/student page/BookedDetails";
 import Payment from "../components/studey session section/payment/Payment";
 import AdminRoute from "../privet/AdminRoute";
 import TutorRoute from "../privet/TutorRoute";
+import StudentRoute from "../privet/StudentRoute";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -136,23 +137,43 @@ export const router = createBrowserRouter([
       //student routs only
       {
         path: "view-book-session",
-        element: <ViewBookedSession></ViewBookedSession>,
+        element: (
+          <StudentRoute>
+            <ViewBookedSession></ViewBookedSession>,
+          </StudentRoute>
+        ),
       },
       {
         path: "create-note",
-        element: <CreateNote></CreateNote>,
+        element: (
+          <StudentRoute>
+            <CreateNote></CreateNote>,
+          </StudentRoute>
+        ),
       },
       {
         path: "personal-note",
-        element: <ManagePersonalNotes></ManagePersonalNotes>,
+        element: (
+          <StudentRoute>
+            <ManagePersonalNotes></ManagePersonalNotes>,
+          </StudentRoute>
+        ),
       },
       {
         path: "all-study-materials",
-        element: <ViewStudyMaterials></ViewStudyMaterials>,
+        element: (
+          <StudentRoute>
+            <ViewStudyMaterials></ViewStudyMaterials>,
+          </StudentRoute>
+        ),
       },
       {
         path: "booked-details/:id",
-        element: <BookedDetails></BookedDetails>,
+        element: (
+          <StudentRoute>
+            <BookedDetails></BookedDetails>,
+          </StudentRoute>
+        ),
       },
     ],
   },
