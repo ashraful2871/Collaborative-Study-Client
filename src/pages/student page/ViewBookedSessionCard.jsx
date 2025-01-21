@@ -6,8 +6,8 @@ const ViewBookedSessionCard = ({ session }) => {
     session;
   return (
     <div className="card bg-base-100 shadow-md w-full max-w-lg mx-auto flex flex-col">
-      <figure className="h-64 w-full">
-        <img src={image} alt="Course" className="w-full h-full object-cover" />
+      <figure className="h-48 md:h-52 lg:h-64 w-full rounded-xl border">
+        <img src={image} alt="Course" className="w-full h-full rounded-xl" />
       </figure>
 
       <div className="card-body p-5 space-y-3 flex flex-col flex-grow">

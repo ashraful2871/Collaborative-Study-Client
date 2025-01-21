@@ -31,7 +31,7 @@ const CreateNote = () => {
   };
   return (
     <div className="flex justify-center  min-h-screen bg-base-100">
-      <div className="card w-full  p-8 shadow-lg bg-white">
+      <div className="card w-full  p-4  bg-white">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold">
             Create Your <span className="text-blue-500">Personal Note</span>

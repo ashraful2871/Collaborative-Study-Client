@@ -6,7 +6,11 @@ const AllTutorCard = ({ tutor }) => {
     <div className="flex items-center gap-3 border-2 p-3 rounded-xl">
       <div className="avatar">
         <div className="rounded-full h-12 w-12">
-          <img src={photo} alt="Avatar Tailwind CSS Component" />
+          <img
+            referrerPolicy="no-referrer"
+            src={photo}
+            alt="Avatar Tailwind CSS Component"
+          />
         </div>
       </div>
       <div>

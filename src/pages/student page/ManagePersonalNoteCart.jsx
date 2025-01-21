@@ -70,7 +70,7 @@ const ManagePersonalNoteCart = ({ note, refetch }) => {
   };
   return (
     <div>
-      <div className="card bg-base-100 border">
+      <div className="card bg-base-100 border-2">
         <div className="card-body flex flex-grow">
           <div className="flex-grow">
             <h2 className="card-title">{title} </h2>

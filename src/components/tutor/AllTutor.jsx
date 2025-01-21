@@ -21,7 +21,7 @@ const AllTutor = () => {
   return (
     <div className="space-y-5">
       <h2 className="text-4xl font-bold">All Tutor</h2>
-      <div className="grid grid-cols-6 gap-5">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
         {tutors.map((tutor) => (
           <AllTutorCard key={tutor._id} tutor={tutor}></AllTutorCard>
         ))}

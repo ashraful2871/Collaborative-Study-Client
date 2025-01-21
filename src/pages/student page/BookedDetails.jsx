@@ -75,12 +75,12 @@ const BookedDetails = () => {
           </div>
         </div>
 
-        <div className="card bg-base-100 shadow-md p-5 mb-10">
+        <div className="card bg-base-100 shadow-md md:p-5 mb-10">
           <figure className="mb-5">
             <img
               src={image}
               alt="Course"
-              className="rounded-lg mx-auto w-full h-[800px]"
+              className="rounded-lg md:mx-auto w-full lg:h-[800px]"
             />
           </figure>
 
@@ -89,7 +89,7 @@ const BookedDetails = () => {
               {sessionTitle}
             </h2>
             <p className="text-gray-700 mb-5">{description}</p>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid md:grid-cols-2 gap-4">
               <p>
                 <strong>Student Name: </strong> {studentName}
               </p>

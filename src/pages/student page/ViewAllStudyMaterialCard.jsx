@@ -38,20 +38,20 @@ const ViewAllStudyMaterialCard = ({ material }) => {
   };
 
   return (
-    <div>
-      <div className="card bg-white shadow-xl border rounded-lg overflow-hidden">
-        <img
-          src={bookingImage}
-          alt="Study Session"
-          className="w-full h-48 object-cover"
-        />
+    <div className="">
+      <div className="card border-2 rounded-lg overflow-hidden">
+        <img src={bookingImage} alt="Study Session" className="w-full h-52" />
 
-        <div className="p-4">
-          <h2 className="card-title">{sessionTitle}</h2>
+        <div className="p-4 flex flex-col justify-between h-40">
+          {/* Title */}
+          <h2 className="card-title text-lg md:text-xl font-semibold mb-2">
+            {sessionTitle}
+          </h2>
 
-          <div className="flex justify-between mt-2">
+          {/* Button */}
+          <div className="mt-auto">
             <button
-              className="btn btn-primary bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg"
+              className="btn btn-primary bg-blue-500 hover:bg-blue-600 text-sm md:text-lg font-semibold text-white"
               onClick={handleViewModal}
             >
               View Material
@@ -70,7 +70,7 @@ const ViewAllStudyMaterialCard = ({ material }) => {
           <div
             method="dialog"
             className="modal-box border-2 p-6 space-y-6 bg-base-200 rounded-lg"
-            style={{ width: "600px", maxWidth: "90%" }}
+            style={{ maxWidth: "80%" }}
           >
             <button
               type="button"
@@ -79,12 +79,12 @@ const ViewAllStudyMaterialCard = ({ material }) => {
             >
               ✕
             </button>
-            <h3 className="text-center text-2xl font-bold text-blue-500">
-              Get your Material Provide by Tutor
+            <h3 className="text-center text-xl md:text-2xl font-bold text-blue-500">
+              Get your Material Provided by Tutor
             </h3>
 
             <div className="flex justify-center">
-              <div className="card w-96 bg-white space-y-5 border rounded-lg overflow-hidden">
+              <div className="card w-full md:w-96 bg-white space-y-5 border rounded-lg overflow-hidden shadow-lg">
                 <img
                   src={materialImage}
                   alt="Study Material"
@@ -92,11 +92,15 @@ const ViewAllStudyMaterialCard = ({ material }) => {
                 />
 
                 <div className="p-4 space-y-3">
-                  <p>
-                    <span>study Session ID: {materialId}</span>
+                  <p className="text-sm md:text-base">
+                    <span>Study Session ID: {materialId}</span>
                   </p>
-                  <Link target="_blank" to={driveLink} className="btn-link">
-                    <span className="font-semibold">Material Link</span>{" "}
+                  <Link
+                    target="_blank"
+                    to={driveLink}
+                    className="btn-link text-sm md:text-base"
+                  >
+                    <span className="font-semibold">Material Link</span>
                   </Link>
                   <div>
                     <button

@@ -22,7 +22,7 @@ const StudySession = () => {
   return (
     <div className="space-y-8">
       <h2 className="text-4xl font-bold">Study Session</h2>
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {allStudy.map((study) => (
           <AllStudySessionCard
             key={study._id}

@@ -25,8 +25,7 @@ const ManagePersonalNotes = () => {
   }
   return (
     <div>
-      <h2>i am ManagePersonalNotes</h2>
-      <div className="grid grid-cols-4 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         {notes.map((note) => (
           <ManagePersonalNoteCart
             key={note._id}
