@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import axios from "axios";
+import toast from "react-hot-toast";
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_upload_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const UpdateMaterialModal = ({ onClose, materialData, refetch }) => {
@@ -52,6 +53,7 @@ const UpdateMaterialModal = ({ onClose, materialData, refetch }) => {
     console.log(data);
     onClose();
     setLoading(false);
+    toast.success("update successful");
     refetch();
   };
 
@@ -139,7 +141,7 @@ const UpdateMaterialModal = ({ onClose, materialData, refetch }) => {
         </div>
         <div className="form-control mt-4">
           {loading ? (
-            <button className="btn btn-primary w-full">
+            <button className="btn btn-primary w-full bg-blue-500 hover:bg-blue-600  font-semibold text-white ">
               <span className="loading loading-spinner"></span>
             </button>
           ) : (

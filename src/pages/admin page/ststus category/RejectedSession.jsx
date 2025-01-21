@@ -53,20 +53,9 @@ const RejectedSession = ({ rejectedSession }) => {
                       </div>
                     </td>
                     <th>
-                      <div className="flex justify-center gap-4">
-                        <button
-                          //disabled={booking.status === "Canceled"}
-                          className="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600 transition-all flex gap-1 items-center shadow-md disabled:bg-gray-500 disabled:cursor-not-allowed"
-                        >
-                          <FcApproval /> Approve
-                        </button>
-                        <button
-                          //disabled={booking.status === "Canceled"}
-                          className="bg-red-500 text-white px-3 py-1 rounded text-sm hover:bg-red-600 transition-all flex gap-1 items-center shadow-md disabled:bg-gray-500 disabled:cursor-not-allowed"
-                        >
-                          <FaTrashRestoreAlt /> Reject
-                        </button>
-                      </div>
+                      <span className="text-red-500 font-bold text-lg">
+                        Actions not allowed
+                      </span>
                     </th>
                   </tr>
                 ))}
