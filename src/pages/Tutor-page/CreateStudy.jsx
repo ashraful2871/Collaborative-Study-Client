@@ -85,7 +85,7 @@ const CreateStudy = () => {
       <div className="card bg-base-100 w-full  border-2">
         <form
           onSubmit={handleSubmit}
-          className="card-body grid grid-cols-2 gap-5 border-2 w-full"
+          className="card-body grid grid-cols-2 gap-5  w-full"
         >
           <div className="form-control">
             <label className="label">
@@ -243,7 +243,9 @@ const CreateStudy = () => {
                 <span className="loading loading-spinner"></span>
               </button>
             ) : (
-              <button className="btn btn-primary">Create </button>
+              <button className="btn btn-primary bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg">
+                Create{" "}
+              </button>
             )}
           </div>
         </form>

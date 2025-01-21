@@ -1,9 +1,9 @@
 import React from "react";
-import UploadMaterialsCard from "../../components/UploadmaterialsCard";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../components/Loading";
+import UploadMaterialsCard from "../../components/UploadMaterialsCard";
 
 const UploadMaterials = () => {
   const { user } = useAuth();

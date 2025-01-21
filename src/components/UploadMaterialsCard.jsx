@@ -33,7 +33,10 @@ const UploadMaterialsCard = ({ material }) => {
         <h2 className="card-title flex-grow">{material.sessionTitle}</h2>
 
         <div className="card-actions justify-start">
-          <button className="btn btn-primary" onClick={openModal}>
+          <button
+            className="btn btn-primary bg-blue-500 hover:bg-blue-600  font-semibold text-white"
+            onClick={openModal}
+          >
             Upload Material
           </button>
         </div>
