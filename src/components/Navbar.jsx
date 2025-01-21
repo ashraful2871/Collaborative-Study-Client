@@ -1,15 +1,27 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import useRole from "../hooks/useRole";
 
 const Navbar = () => {
   const { user, signOutUser } = useAuth();
+  const [role] = useRole();
   const DropDownLinks = (
     <>
       {" "}
-      {user && (
+      {user && role === "admin" && (
         <li>
-          <NavLink to="/dashboard">Dashboard</NavLink>
+          <NavLink to="/dashboard/all-users">Dashboard</NavLink>
+        </li>
+      )}
+      {user && role === "tutor" && (
+        <li>
+          <NavLink to="/dashboard/view-all-study">Dashboard</NavLink>
+        </li>
+      )}
+      {user && role === "student" && (
+        <li>
+          <NavLink to="/dashboard/view-book-session">Dashboard</NavLink>
         </li>
       )}
       {user ? (
@@ -42,7 +54,7 @@ const Navbar = () => {
           <Link className="text-2xl font-bold">Collaborative Study</Link>
         </div>
         <div className="flex-none">
-          <div className="dropdown dropdown-end">
+          {/* <div className="dropdown dropdown-end">
             <div
               tabIndex={0}
               role="button"
@@ -80,7 +92,7 @@ const Navbar = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="dropdown dropdown-end">
             <div
               tabIndex={0}

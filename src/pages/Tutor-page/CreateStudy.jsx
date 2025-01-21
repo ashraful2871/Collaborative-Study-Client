@@ -85,7 +85,7 @@ const CreateStudy = () => {
       <div className="card bg-base-100 w-full  border-2">
         <form
           onSubmit={handleSubmit}
-          className="card-body grid grid-cols-2 gap-5  w-full"
+          className="card-body grid grid-cols-2 gap-5 w-full"
         >
           <div className="form-control">
             <label className="label">

@@ -92,6 +92,7 @@ const CheckoutForm = ({ sessionPayment }) => {
     if (confirmError) {
       console.log("[Error during confirmation]", confirmError);
       //setPaymentStatus("Payment failed. Please try again.");
+      setProcessing(false);
       toast.error("Payment failed. Please try again.");
     } else if (paymentIntent.status === "succeeded") {
       //   console.log("Payment successful:", paymentIntent);
@@ -107,37 +108,42 @@ const CheckoutForm = ({ sessionPayment }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <CardElement
-        options={{
-          style: {
-            base: {
-              fontSize: "16px",
-              color: "#424770",
-              "::placeholder": {
-                color: "#aab7c4",
+    <div className=" w-1/2 mx-auto">
+      <div>
+        {" "}
+        <form onSubmit={handleSubmit}>
+          <CardElement
+            options={{
+              style: {
+                base: {
+                  fontSize: "16px",
+                  color: "#424770",
+                  "::placeholder": {
+                    color: "#aab7c4",
+                  },
+                },
+                invalid: {
+                  color: "#9e2146",
+                },
               },
-            },
-            invalid: {
-              color: "#9e2146",
-            },
-          },
-        }}
-      />
-      {processing ? (
-        <button className="btn btn-primary">
-          <span className="loading loading-spinner"></span>
-        </button>
-      ) : (
-        <button
-          disabled={!stripe || processing}
-          className="btn btn-primary"
-          type="submit"
-        >
-          Pay
-        </button>
-      )}
-    </form>
+            }}
+          />
+          {processing ? (
+            <button className="btn btn-primary bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg">
+              <span className="loading loading-spinner"></span>
+            </button>
+          ) : (
+            <button
+              disabled={!stripe || processing}
+              className="btn btn-primary bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg"
+              type="submit"
+            >
+              Pay
+            </button>
+          )}
+        </form>
+      </div>
+    </div>
   );
 };
 

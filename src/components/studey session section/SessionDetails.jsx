@@ -145,8 +145,12 @@ const SessionDetails = () => {
         {reviews.map((review) => (
           <div key={review._id} className="flex items-center gap-3 mt-5">
             <div className="avatar">
-              <div className="mask mask-squircle h-12 w-12">
-                <img src={review.photo} alt="Avatar Tailwind CSS Component" />
+              <div className="rounded-full h-12 w-12 ">
+                <img
+                  referrerPolicy="no-referrer"
+                  src={review.photo}
+                  alt="Avatar Tailwind CSS Component"
+                />
               </div>
             </div>
             <div>

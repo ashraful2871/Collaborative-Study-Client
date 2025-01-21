@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import CheckoutForm from "./form/CheckoutForm";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import Loading from "../../Loading";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
@@ -19,9 +20,12 @@ const Payment = () => {
     },
   });
   console.log(sessionPayment);
-
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
   return (
-    <div>
+    <div className="space-y-6">
+      <h2 className="text-3xl font-bold text-center ">Pay now </h2>
       <Elements stripe={stripePromise}>
         <CheckoutForm sessionPayment={sessionPayment} />
       </Elements>
