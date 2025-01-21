@@ -30,7 +30,7 @@ const Dashboard = () => {
             {role === "tutor" && <TutorMenu />}
             {role === "student" && <StudentMenu />}
           </div>
-          <div className="drawer z-50">
+          <div className="drawer z-50 block lg:hidden">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content">
               {/* Page content here */}
@@ -73,7 +73,7 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="mt-auto hidden">
+          <div className="mt-auto hidden lg:block">
             <ul className="menu">
               <li>
                 <button

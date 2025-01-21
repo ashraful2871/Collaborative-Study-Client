@@ -23,6 +23,7 @@ const PendingSessionTableTow = ({
   }, [approve]);
 
   const openModal = (session) => {
+    console.log(session);
     setApprove(session);
   };
   const handleViewModal = () => {

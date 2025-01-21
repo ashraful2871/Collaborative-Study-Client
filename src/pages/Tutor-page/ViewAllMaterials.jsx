@@ -27,7 +27,6 @@ const ViewAllMaterials = () => {
   }
   return (
     <div>
-      <h2>ViewAllMaterials</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
         {materials.map((material) => (
           <AllMaterialCard

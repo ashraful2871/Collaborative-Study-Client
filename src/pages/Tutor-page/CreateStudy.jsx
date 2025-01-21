@@ -85,7 +85,7 @@ const CreateStudy = () => {
       <div className="card bg-base-100 w-full  border-2">
         <form
           onSubmit={handleSubmit}
-          className="card-body grid grid-cols-2 gap-5 w-full"
+          className="card-body grid grid-cols-1 md:grid-cols-2 gap-5 w-full"
         >
           <div className="form-control">
             <label className="label">
@@ -237,9 +237,9 @@ const CreateStudy = () => {
             ></textarea>
           </div>
 
-          <div className="form-control mt-6 col-span-2">
+          <div className="form-control mt-6 md:col-span-2">
             {loading ? (
-              <button className="btn btn-primary w-full">
+              <button className="btn btn-primary bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg w-full">
                 <span className="loading loading-spinner"></span>
               </button>
             ) : (

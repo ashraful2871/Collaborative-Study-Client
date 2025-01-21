@@ -9,6 +9,7 @@ const ApprovedSessionTableRow = ({ session, idx, refetch }) => {
   const axiosSecure = useAxiosSecure();
 
   const handleViewModal = () => {
+    console.log("modal");
     setOpenModal(true);
   };
 
@@ -106,15 +107,11 @@ const ApprovedSessionTableRow = ({ session, idx, refetch }) => {
       {openModal && (
         <dialog
           id="upload_material_modal"
-          className="modal"
+          className="modal fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
           open
           onClose={handleCloseModal}
         >
-          <div
-            method="dialog"
-            className="modal-box border-2 p-6 space-y-6 bg-base-200 rounded-lg"
-            style={{ width: "600px", maxWidth: "90%" }}
-          >
+          <div className="modal-box border-2 p-6 space-y-6 bg-base-200 rounded-lg w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl">
             <h3 className="text-center text-2xl font-bold text-blue-500">
               Update Approved Status
             </h3>
@@ -133,7 +130,7 @@ const ApprovedSessionTableRow = ({ session, idx, refetch }) => {
             <div className="card-actions justify-between">
               <button
                 type="button"
-                className="btn btn-error "
+                className="btn btn-error bg-red-500 hover:bg-red-600  font-semibold text-white text-lg"
                 onClick={handleCloseModal}
               >
                 Cancel
@@ -141,7 +138,7 @@ const ApprovedSessionTableRow = ({ session, idx, refetch }) => {
               <button
                 onClick={() => handleUpdateStatus(session._id, status)}
                 type="button"
-                className="btn btn-primary"
+                className="btn btn-primary bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg"
               >
                 Update
               </button>
