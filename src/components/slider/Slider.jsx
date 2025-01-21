@@ -22,33 +22,27 @@ const Slider = () => {
         }}
         navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
-        className="mySwiper h-[500px]  border-2 border-red-600 rounded-xl text-center"
+        className="mySwiper h-[500px] rounded-xl text-center"
       >
         <SwiperSlide>
           <img
             className="w-full"
-            src="https://i.ibb.co.com/kGBfJ1v/Red-and-Black-Modern-Business-Development-Strategy-Banner-1.png"
-            alt=""
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            className="w-full object-cover"
-            src="https://i.ibb.co.com/5r7HPsV/Yellow-Design-Tutorial-Youtube-Thumbnail.png"
+            src="https://i.ibb.co.com/ZgzZMJp/Blue-Welcome-to-School-Library-Banner.png"
             alt=""
           />
         </SwiperSlide>
         <SwiperSlide>
           <img
             className="w-full"
-            src="https://i.ibb.co.com/JdrGNRm/home.jpg"
+            src="https://i.ibb.co.com/dtb88pr/Basic-English-Class-Banner.png"
             alt=""
           />
         </SwiperSlide>
+
         <SwiperSlide>
           <img
-            className="w-full"
-            src="https://i.ibb.co.com/JdrGNRm/home.jpg"
+            className="w-full h-full"
+            src="https://i.ibb.co.com/tq3Rdk8/Study-Habits-Education-Presentation-in-Black-Blue-and-Yellow-Illustrative-Style-1.png"
             alt=""
           />
         </SwiperSlide>
