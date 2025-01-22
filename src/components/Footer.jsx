@@ -1,18 +1,20 @@
 import React from "react";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import useRole from "../hooks/useRole";
 
 const Footer = () => {
+  const [role] = useRole();
   return (
     <footer className="bg-base-200 text-base-content border-t">
       <div className="">
         <div className="p-10 grid grid-cols-1 md:flex md:justify-evenly gap-8 bg-base-200 text-base-content">
           <div className="space-y-2">
             <h3 className="font-bold text-lg">Car Rent</h3>
-            <p>Contact: carrent@contact.com</p>
+            <p>Contact: costudy@contact.com</p>
             <img
-              className="h-28 w-32"
-              src="https://i.ibb.co.com/D4YprTd/logo-removebg.png"
+              className="h-28 w-32 object-cover"
+              src="https://i.ibb.co.com/ckLVRx4/educative-logo.png"
               alt=""
             />
           </div>
@@ -22,25 +24,27 @@ const Footer = () => {
               <li>
                 <Link to="/">Home</Link>
               </li>
-              <li>
-                <Link to="/available_car"> Available Car</Link>
-              </li>
-              <li>
-                <Link to="/add_car">Add Car</Link>
-              </li>
-              <li>
-                {" "}
-                <Link to="/my_cars">My Car</Link>
-              </li>
-              <li>
-                <Link to="/my_bookings">My Bookings</Link>
-              </li>
+              {role === "admin" && (
+                <li>
+                  <Link to="/dashboard/all-users">Dashboard</Link>
+                </li>
+              )}
+              {role === "tutor" && (
+                <li>
+                  <Link to="/dashboard/view-all-study">Dashboard</Link>
+                </li>
+              )}
+              {role === "student" && (
+                <li>
+                  <Link to="/dashboard/view-book-session">Dashboard</Link>
+                </li>
+              )}
             </ul>
           </div>
           <div>
             <h3 className="font-bold text-lg">Benefits</h3>
             <ul className="list-none mt-2 space-y-1">
-              <li>Exclusive Car Rental Discounts</li>
+              <li>Exclusive Study Session and Classes</li>
               <li>Community Forums</li>
               <li>24/7 Support</li>
             </ul>
