@@ -1,5 +1,6 @@
 import {
   createUserWithEmailAndPassword,
+  GithubAuthProvider,
   GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
@@ -14,6 +15,7 @@ import { auth } from "../firebase/firebase.init";
 export const AuthContext = createContext();
 
 const provider = new GoogleAuthProvider();
+const githubProvider = new GithubAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
@@ -59,6 +61,21 @@ const AuthProvider = ({ children }) => {
     try {
       setLoading(true);
       const result = await signInWithPopup(auth, provider);
+      await handleToken(result.user.email);
+      return result;
+    } catch (error) {
+      console.error("Error with Google login:", error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  //gitHub login
+  const githubLogin = async () => {
+    try {
+      setLoading(true);
+      const result = await signInWithPopup(auth, githubProvider);
       await handleToken(result.user.email);
       return result;
     } catch (error) {
@@ -131,6 +148,7 @@ const AuthProvider = ({ children }) => {
     loading,
     setUser,
     user,
+    githubLogin,
   };
 
   return (

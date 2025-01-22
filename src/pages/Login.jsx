@@ -4,8 +4,11 @@ import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import axios from "axios";
+import GitHubLogin from "./git-hub/GitHubLogin";
+import { useQueryClient } from "@tanstack/react-query";
 
 const Login = () => {
+  const queryClient = useQueryClient();
   const { signInUser, googleLogin } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -56,9 +59,14 @@ const Login = () => {
           photo: result?.user?.photoURL,
           role: "student",
         };
-        axios.post(`${import.meta.env.VITE_API_URL}/users`, userInfo);
-        toast.success("Successfully login");
-        navigate(location?.state ? location.state : "/");
+        axios
+          .post(`${import.meta.env.VITE_API_URL}/users`, userInfo)
+          .then(() => {
+            // Invalidate the query so the role is refetched
+            queryClient.invalidateQueries(["role", result.user?.email]);
+            toast.success("Signed Up Successfully");
+            navigate(location?.state ? location.state : "/");
+          });
       })
       .catch((error) => {
         console.log(error);
@@ -73,7 +81,7 @@ const Login = () => {
           {" "}
           <div className="mt-5">
             <h2 className="text-center text-4xl font-bold">
-              <span className="text-red-600">Login</span> Now
+              <span className="text-blue-600">Login</span> Now
             </h2>
           </div>
           <div className="form-control">
@@ -106,13 +114,13 @@ const Login = () => {
             </label>
           </div>
           <div className="form-control mt-6">
-            <button className="btn bg-blue-700 hover:bg-blue-600 text-white font-bold rounded-lg transition duration-300 text-base">
+            <button className="btn bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-lg transition duration-300 text-base">
               Login
             </button>
           </div>
         </form>
         <div className="divider -mt-1">or</div>
-        <div className="flex justify-center my-6 font-semibold">
+        <div className="flex justify-center my-4 font-semibold">
           <button
             onClick={handleGoogleLogin}
             className="flex items-center gap-2 text-lg btn border border-black btn-ghost"
@@ -123,10 +131,11 @@ const Login = () => {
             Login With Google
           </button>
         </div>
+        <GitHubLogin></GitHubLogin>
         <div className="text-center  my-6">
           <h2 className="text-lg">
             Do not Have an Account?{" "}
-            <span className="text-red-500 font-semibold">
+            <span className="text-blue-500 font-semibold">
               <Link to="/sign-up"> Sign Up</Link>
             </span>
           </h2>

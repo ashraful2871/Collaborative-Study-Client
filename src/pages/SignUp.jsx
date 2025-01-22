@@ -1,16 +1,21 @@
+import axios from "axios";
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
-import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+import GitHubLogin from "./git-hub/GitHubLogin";
+import { useQueryClient } from "@tanstack/react-query";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_upload_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const SignUp = () => {
+  const queryClient = useQueryClient();
   const { signUpUser, setUser, updateUserProfile, googleLogin } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [userRole, SetUserRole] = useState(null);
+
   const handleSignUp = async (e) => {
     setLoading(true);
     e.preventDefault();
@@ -90,29 +95,37 @@ const SignUp = () => {
     }
 
     //sign up user
+
     signUpUser(email, password)
       .then((result) => {
-        console.log(result.user);
         updateUserProfile(name, imageUrl);
         setUser({ ...result.user, photoURL: imageUrl, displayName: name });
+
         const userInfo = {
           email: result?.user?.email,
-          name: name,
+          name,
           photo: imageUrl,
-          role: "student",
+          role: userRole, // Set the role from the dropdown
         };
-        console.log(userInfo.name);
-        axios.post(`${import.meta.env.VITE_API_URL}/users`, userInfo);
-        toast.success("Signed Up Successfully");
-        navigate("/");
+
+        // Save user to the database
+        axios
+          .post(`${import.meta.env.VITE_API_URL}/users`, userInfo)
+          .then(() => {
+            // Invalidate the query so the role is refetched
+            queryClient.invalidateQueries(["role", email]);
+            toast.success("Signed Up Successfully");
+            navigate("/");
+          });
       })
       .catch((error) => {
-        console.log(error);
-      });
-    setLoading(true);
+        console.error(error);
+        toast.error("Signup failed");
+      })
+      .finally(() => setLoading(false));
   };
+  //google login
   const handleGoogleSignUP = () => {
-    //google login
     googleLogin()
       .then((result) => {
         console.log(result.user);
@@ -122,9 +135,14 @@ const SignUp = () => {
           photo: result?.user?.photoURL,
           role: "student",
         };
-        axios.post(`${import.meta.env.VITE_API_URL}/users`, userInfo);
-        toast.success("Successfully Signed Up");
-        navigate("/");
+        axios
+          .post(`${import.meta.env.VITE_API_URL}/users`, userInfo)
+          .then(() => {
+            // Invalidate the query so the role is refetched
+            queryClient.invalidateQueries(["role", result.user?.email]);
+            toast.success("Signed Up Successfully");
+            navigate("/");
+          });
       })
       .catch((error) => {
         console.log(error);
@@ -135,7 +153,7 @@ const SignUp = () => {
       <div className="card bg-base-100 w-full max-w-sm shrink-0 border-2">
         <div className="mt-5">
           <h2 className="text-center text-4xl font-bold">
-            <span className="text-red-600">Sign Up</span> Now
+            <span className="text-blue-600">Sign Up</span> Now
           </h2>
         </div>
         <form onSubmit={handleSignUp} className="card-body">
@@ -151,6 +169,7 @@ const SignUp = () => {
               required
             />
           </div>
+          {/* select image */}
           <div className="form-control">
             <label className="label">
               <span className="label-text">Photo</span>
@@ -159,10 +178,29 @@ const SignUp = () => {
               type="file"
               placeholder="Photo"
               name="image"
-              className="input input-bordered"
+              className="input input-bordered pt-2"
               required
             />
           </div>
+
+          {/* select role */}
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">User Role</span>
+            </label>
+            <select
+              onChange={(e) => SetUserRole(e.target.value)}
+              className="select select-bordered w-full max-w-xs"
+            >
+              <option disabled selected>
+                Select Role
+              </option>
+              <option>student</option>
+              <option>tutor</option>
+            </select>
+          </div>
+
+          {/* email */}
           <div className="form-control">
             <label className="label">
               <span className="label-text">Email</span>
@@ -189,17 +227,19 @@ const SignUp = () => {
           </div>
           <div className="form-control mt-6">
             {loading ? (
-              <button className="btn btn-primary w-full">
+              <button className="btn bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-lg transition duration-300 text-base btn-primary w-full">
                 <span className="loading loading-spinner"></span>
               </button>
             ) : (
-              <button className="btn btn-primary">Sign Up </button>
+              <button className="btn bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-lg transition duration-300 text-base">
+                Sign Up{" "}
+              </button>
             )}
           </div>
         </form>
         <div>
           <div className="divider -mt-1">or</div>
-          <div className="flex justify-center my-6 font-semibold">
+          <div className="flex justify-center my-4 font-semibold">
             <button
               onClick={handleGoogleSignUP}
               className="flex items-center gap-2 text-lg btn border border-black btn-ghost"
@@ -210,11 +250,12 @@ const SignUp = () => {
               Sign Up With Google
             </button>
           </div>
+          <GitHubLogin></GitHubLogin>
         </div>
         <div className="text-center  my-6">
           <h2 className="text-lg">
             Already Have an Account?{" "}
-            <span className="text-red-500 font-semibold">
+            <span className="text-blue-500 font-semibold">
               <Link to="/login"> Login</Link>
             </span>
           </h2>

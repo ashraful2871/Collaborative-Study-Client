@@ -51,7 +51,18 @@ const Navbar = () => {
     <div>
       <div className="navbar bg-base-100">
         <div className="flex-1">
-          <Link className="text-2xl font-bold">Collaborative Study</Link>
+          <Link>
+            <div className="flex items-center">
+              <div>
+                <img
+                  className="h-12 w-12"
+                  src="https://i.ibb.co.com/ckLVRx4/educative-logo.png"
+                  alt=""
+                />
+              </div>
+              <span className="text-2xl font-bold">Collaborative Study</span>
+            </div>
+          </Link>
         </div>
         <div className="flex-none">
           {/* <div className="dropdown dropdown-end">
