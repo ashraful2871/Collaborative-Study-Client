@@ -6,15 +6,23 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import GitHubLogin from "./git-hub/GitHubLogin";
 import { useQueryClient } from "@tanstack/react-query";
+import Loading from "../components/Loading";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_upload_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const SignUp = () => {
   const queryClient = useQueryClient();
-  const { signUpUser, setUser, updateUserProfile, googleLogin } = useAuth();
+  const {
+    signUpUser,
+    setUser,
+    updateUserProfile,
+    googleLogin,
+    loading: loginLoading,
+  } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [userRole, SetUserRole] = useState(null);
+  if (loginLoading) return <Loading></Loading>;
 
   const handleSignUp = async (e) => {
     setLoading(true);

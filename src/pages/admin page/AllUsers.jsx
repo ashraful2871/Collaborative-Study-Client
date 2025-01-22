@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
+import Loading from "../../components/Loading";
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
   const [search, setSearch] = useState("");
-  const { data: users = [], refetch } = useQuery({
+  const {
+    data: users = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["users", search],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/users?search=${search}`);
@@ -69,6 +74,11 @@ const AllUsers = () => {
       }
     });
   };
+
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
+
   return (
     <div>
       <input

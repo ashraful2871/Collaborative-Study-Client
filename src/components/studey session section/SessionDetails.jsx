@@ -81,7 +81,7 @@ const SessionDetails = () => {
         <img
           src={image}
           alt={sessionTitle}
-          className="w-full h-[500px] object-cover  rounded-lg"
+          className="w-full md:h-[500px] object-cover  rounded-lg"
         />
       </div>
 
@@ -90,7 +90,7 @@ const SessionDetails = () => {
       <p className="text-gray-600 mb-5">{description}</p>
 
       {/* Details Section */}
-      <div className="grid grid-cols-2 gap-4 space-y-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 space-y-4">
         {/* Column 1 */}
         <div className="space-y-4">
           <p className="font-semibold">
@@ -144,39 +144,46 @@ const SessionDetails = () => {
         <h2 className="text-center font-semibold text-3xl text-blue-500">
           Reviews
         </h2>
-        <div className="flex justify-center mt-5">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-5 w-full max-w-4xl rounded-lg">
-            {reviews?.map((review) => (
-              <div
-                key={review._id}
-                className="flex items-start gap-4 border-b-2 pb-4 mb-4"
-              >
-                {/* User Avatar */}
-                <img
-                  className="rounded-full h-12 w-12"
-                  referrerPolicy="no-referrer"
-                  src={review.photo}
-                  alt={`${review.name}'s avatar`}
-                />
 
-                {/* Review Details */}
-                <div>
-                  <div className="font-bold text-lg">{review.name}</div>
-                  <p className="text-base flex gap-2 items-center">
-                    Rating:{" "}
-                    <Rating
-                      style={{ maxWidth: 100 }}
-                      value={review.rating}
-                      readOnly
-                    />{" "}
-                    ({review.rating})
-                  </p>
-                  <p className="text-base">Review: {review.review}</p>
+        {reviews.length > 0 ? (
+          <div className="flex justify-center mt-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-5 w-full max-w-4xl rounded-lg">
+              {reviews?.map((review) => (
+                <div
+                  key={review._id}
+                  className="flex items-start gap-4 border-b-2 pb-4 mb-4"
+                >
+                  {/* User Avatar */}
+                  <img
+                    className="rounded-full h-12 w-12"
+                    referrerPolicy="no-referrer"
+                    src={review.photo}
+                    alt={`${review.name}'s avatar`}
+                  />
+
+                  {/* Review Details */}
+                  <div>
+                    <div className="font-bold text-lg">{review.name}</div>
+                    <p className="text-base flex gap-2 items-center">
+                      Rating:{" "}
+                      <Rating
+                        style={{ maxWidth: 100 }}
+                        value={review.rating}
+                        readOnly
+                      />{" "}
+                      ({review.rating})
+                    </p>
+                    <p className="text-base">Review: {review.review}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        ) : (
+          <h2 className="text-center my-8 text-2xl font-semibold text-red-500">
+            no review available now
+          </h2>
+        )}
       </div>
 
       <div className="card-actions justify-center ">

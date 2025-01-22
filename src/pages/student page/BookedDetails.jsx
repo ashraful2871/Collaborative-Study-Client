@@ -4,6 +4,8 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../components/Loading";
 import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const BookedDetails = () => {
   const { id } = useParams();
@@ -43,7 +45,14 @@ const BookedDetails = () => {
     console.log(reviewData);
 
     const { data } = await axiosSecure.post("/reviews", reviewData);
-    console.log(data);
+    e.target.reset();
+    if (data.insertedId) {
+      Swal.fire({
+        title: "success",
+        text: "thanks For give a Review",
+        icon: "success",
+      });
+    }
   };
 
   if (isLoading) {

@@ -5,14 +5,13 @@ const TutorMenu = () => {
   return (
     <div>
       <ul className="menu">
-        {" "}
-        <li>
-          <NavLink to="/dashboard/create-study">Create study</NavLink>
-        </li>
         <li>
           <NavLink to="/dashboard/view-all-study">
             View all study sessions
           </NavLink>
+        </li>
+        <li>
+          <NavLink to="/dashboard/create-study">Create study</NavLink>
         </li>
         <li>
           <NavLink to="/dashboard/upload-materials">Upload materials</NavLink>

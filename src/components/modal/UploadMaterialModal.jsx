@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_upload_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const UploadMaterialModal = ({ material, onClose }) => {
+  const navigate = useNavigate();
   const { sessionTitle, _id } = material;
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
@@ -51,9 +54,11 @@ const UploadMaterialModal = ({ material, onClose }) => {
       `${import.meta.env.VITE_API_URL}/upload-material`,
       uploadMaterialData
     );
-    console.log(data);
+    // console.log(data);
+    toast.success("Uploaded Successfully");
     onClose();
     setLoading(false);
+    navigate("/dashboard/view-all-materials");
   };
 
   return (
@@ -132,7 +137,7 @@ const UploadMaterialModal = ({ material, onClose }) => {
         </div>
         <div className="form-control mt-4">
           {loading ? (
-            <button className="btn btn-primary w-full">
+            <button className="btn btn-primary w-full bg-blue-500 hover:bg-blue-600  font-semibold text-white">
               <span className="loading loading-spinner"></span>
             </button>
           ) : (

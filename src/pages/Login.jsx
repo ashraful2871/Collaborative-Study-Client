@@ -6,12 +6,14 @@ import { FcGoogle } from "react-icons/fc";
 import axios from "axios";
 import GitHubLogin from "./git-hub/GitHubLogin";
 import { useQueryClient } from "@tanstack/react-query";
+import Loading from "../components/Loading";
 
 const Login = () => {
   const queryClient = useQueryClient();
-  const { signInUser, googleLogin } = useAuth();
+  const { signInUser, googleLogin, loading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  if (loading) return <Loading></Loading>;
   const handleLogin = (e) => {
     e.preventDefault();
 

@@ -7,12 +7,12 @@ const AdminMenu = () => {
       <ul className="menu">
         {" "}
         <li>
-          <NavLink to="/dashboard/all-users">View all users</NavLink>
-        </li>
-        <li>
           <NavLink to="/dashboard/all-study-session">
             View all study session
           </NavLink>
+        </li>
+        <li>
+          <NavLink to="/dashboard/all-users">View all users</NavLink>
         </li>
         <li>
           <NavLink to="/dashboard/all-materials">View all materials</NavLink>

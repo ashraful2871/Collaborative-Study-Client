@@ -59,7 +59,31 @@ const StudySessionCard = ({ study, refetch }) => {
         />
       </figure>
       <div className="card-body p-4">
-        <h2 className="text-xl font-bold text-gray-800">{sessionTitle}</h2>
+        <div className="flex items-center gap-3">
+          <div>
+            <h2 className="text-xl font-bold text-gray-800">{sessionTitle}</h2>
+          </div>
+          <div className="mt-2">
+            {status === "Pending" && (
+              <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-sm font-bold shadow-md transition-colors  mb-2">
+                <span className="h-2 w-2 rounded-full bg-yellow-500"></span>
+                <span className="text-yellow-600">{status}</span>
+              </div>
+            )}
+            {status === "Success" && (
+              <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-sm font-bold shadow-md transition-colors  mb-2">
+                <span className="h-2 w-2 rounded-full bg-green-500"></span>
+                <span className="text-green-600">{status}</span>
+              </div>
+            )}
+            {status === "Rejected" && (
+              <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-sm font-bold shadow-md transition-colors mb-2 border-2">
+                <span className="h-2 w-2 rounded-full bg-red-500"></span>
+                <span className="text-red-600">{status}</span>
+              </div>
+            )}
+          </div>
+        </div>
         <p className="text-sm text-gray-600 mt-2">{description}</p>
 
         <div className="mt-4">
@@ -126,26 +150,6 @@ const StudySessionCard = ({ study, refetch }) => {
           )}
         </div>
         <div className="flex justify-between items-center mt-3">
-          <div className="mt-2">
-            {status === "Pending" && (
-              <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-sm font-bold shadow-md transition-colors  mb-2">
-                <span className="h-2 w-2 rounded-full bg-yellow-500"></span>
-                <span className="text-yellow-600">{status}</span>
-              </div>
-            )}
-            {status === "Success" && (
-              <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-sm font-bold shadow-md transition-colors  mb-2">
-                <span className="h-2 w-2 rounded-full bg-green-500"></span>
-                <span className="text-green-600">{status}</span>
-              </div>
-            )}
-            {status === "Rejected" && (
-              <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-sm font-bold shadow-md transition-colors mb-2 border-2">
-                <span className="h-2 w-2 rounded-full bg-red-500"></span>
-                <span className="text-red-600">{status}</span>
-              </div>
-            )}
-          </div>
           {status === "Rejected" && (
             <div>
               <button

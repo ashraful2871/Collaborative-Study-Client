@@ -11,7 +11,7 @@ const Navbar = () => {
       {" "}
       {user && role === "admin" && (
         <li>
-          <NavLink to="/dashboard/all-users">Dashboard</NavLink>
+          <NavLink to="/dashboard/all-study-session">Dashboard</NavLink>
         </li>
       )}
       {user && role === "tutor" && (
