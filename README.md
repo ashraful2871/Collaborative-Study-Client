@@ -6,8 +6,8 @@ The **Collaborative Study Platform** is designed to connect students, tutors, an
 
 ## 🔑 Admin Credentials
 
-- **Admin Email:** admin@collaborativestudy.com
-- **Admin Password:** Admin123
+- **Admin Email:** admin@gmail.com
+- **Admin Password:** Admin123@
 
 ## 🌐 Live Site URL
 
