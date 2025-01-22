@@ -1,11 +1,10 @@
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useParams } from "react-router-dom";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
+import Swal from "sweetalert2";
 import Loading from "../../components/Loading";
 import useAuth from "../../hooks/useAuth";
-import toast from "react-hot-toast";
-import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const BookedDetails = () => {
   const { id } = useParams();
