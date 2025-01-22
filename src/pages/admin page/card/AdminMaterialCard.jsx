@@ -1,11 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import AdminUpdateMaterial from "./AdminUpdateMaterial";
 
 const AdminMaterialCard = ({ material, refetch }) => {
+  const [selectedMaterial, setSelectedMaterial] = useState(null);
   const axiosSecure = useAxiosSecure();
   const { image, materialId, driveLink, tutorEmail, _id } = material;
+
+  useEffect(() => {
+    if (selectedMaterial) {
+      const modal = document.getElementById("upload_material_modal");
+      if (modal) {
+        modal.showModal();
+      }
+    }
+  }, [selectedMaterial]);
+
+  const openModal = () => {
+    setSelectedMaterial(material);
+  };
 
   // Delete material handler
   const handleDelete = (id) => {
@@ -65,7 +80,10 @@ const AdminMaterialCard = ({ material, refetch }) => {
 
           {/* Buttons */}
           <div className="mt-auto flex justify-between items-center border-t pt-4">
-            <button className="btn btn-primary bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg">
+            <button
+              onClick={openModal}
+              className="btn btn-primary bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg"
+            >
               Update
             </button>
             <button
@@ -77,6 +95,14 @@ const AdminMaterialCard = ({ material, refetch }) => {
           </div>
         </div>
       </div>
+      {selectedMaterial && (
+        <AdminUpdateMaterial
+          refetch={refetch}
+          materialData={material}
+          material={selectedMaterial}
+          onClose={() => setSelectedMaterial(null)}
+        />
+      )}
     </div>
   );
 };
