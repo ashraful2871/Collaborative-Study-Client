@@ -7,19 +7,32 @@ import Loading from "../../components/Loading";
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
   const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const rowsPerPage = 10;
+
   const {
-    data: users = [],
+    data: usersData = { users: [], totalUsers: 0 },
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["users", search],
+    queryKey: ["users", search, currentPage],
     queryFn: async () => {
-      const { data } = await axiosSecure.get(`/users?search=${search}`);
+      const { data } = await axiosSecure.get(
+        `/users?search=${search}&page=${currentPage}`
+      );
       return data;
     },
   });
 
-  //make admin
+  const { users, totalUsers } = usersData;
+
+  const totalPages = Math.ceil(totalUsers / rowsPerPage);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  // Make admin
   const handleMAkeAdmin = async (user) => {
     Swal.fire({
       title: "Are you sure?",
@@ -47,7 +60,7 @@ const AllUsers = () => {
     });
   };
 
-  //make tutor
+  // Make tutor
   const handleMakeTutor = async (user) => {
     Swal.fire({
       title: "Are you sure?",
@@ -89,7 +102,6 @@ const AllUsers = () => {
       />
       <div className="overflow-x-auto">
         <table className="table">
-          {/* head */}
           <thead>
             <tr className="text-center">
               <th>#</th>
@@ -100,11 +112,10 @@ const AllUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {/* row 1 */}
             {users.map((user, idx) => (
               <tr key={user._id} className="hover text-center">
-                <th>{idx + 1}</th>
-                <td className="">
+                <th>{(currentPage - 1) * rowsPerPage + idx + 1}</th>
+                <td>
                   <div className="flex items-center gap-3">
                     <div className="avatar">
                       <div className="mask mask-squircle h-12 w-12">
@@ -132,7 +143,7 @@ const AllUsers = () => {
                   </button>
                   <button
                     onClick={() => handleMakeTutor(user)}
-                    className="btn  btn-neutral btn-sm"
+                    className="btn btn-neutral btn-sm"
                   >
                     Make Tutor
                   </button>
@@ -141,6 +152,22 @@ const AllUsers = () => {
             ))}
           </tbody>
         </table>
+      </div>
+
+      <div className="flex justify-center mt-4">
+        {[...Array(totalPages).keys()].map((page) => (
+          <button
+            key={page + 1}
+            onClick={() => handlePageChange(page + 1)}
+            className={`btn btn-sm mx-1 ${
+              currentPage === page + 1
+                ? "btn hover:bg-blue-600 bg-blue-500 text-white"
+                : "btn-outline hover:bg-blue-600"
+            }`}
+          >
+            {page + 1}
+          </button>
+        ))}
       </div>
     </div>
   );
