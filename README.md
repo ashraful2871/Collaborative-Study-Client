@@ -93,63 +93,22 @@ The **Collaborative Study Platform** is a dynamic and interactive web applicatio
 
 ---
 
-## 📦 Dependencies
-
-```json
-"dependencies": {
-    "@smastrom/react-rating": "^1.5.0",
-    "@stripe/react-stripe-js": "^3.1.1",
-    "@stripe/stripe-js": "^5.5.0",
-    "@tanstack/react-query": "^5.64.1",
-    "axios": "^1.7.9",
-    "firebase": "^11.1.0",
-    "localforage": "^1.10.0",
-    "match-sorter": "^8.0.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-hot-toast": "^2.5.1",
-    "react-icons": "^5.4.0",
-    "react-router-dom": "^7.1.1",
-    "sort-by": "^1.2.0",
-    "sweetalert2": "^11.15.10",
-    "swiper": "^11.2.1"
-},
-"devDependencies": {
-    "@eslint/js": "^9.17.0",
-    "@types/react": "^18.3.18",
-    "@types/react-dom": "^18.3.5",
-    "@vitejs/plugin-react": "^4.3.4",
-    "autoprefixer": "^10.4.20",
-    "daisyui": "^4.12.23",
-    "eslint": "^9.17.0",
-    "eslint-plugin-react": "^7.37.2",
-    "eslint-plugin-react-hooks": "^5.0.0",
-    "eslint-plugin-react-refresh": "^0.4.16",
-    "globals": "^15.14.0",
-    "postcss": "^8.4.49",
-    "tailwindcss": "^3.4.17",
-    "vite": "^6.0.5"
-}
-```
-
----
-
 ## ⚙️ Configuration (.env.local)
 
 Create a `.env.local` file in your project root and add the following:
 
 ```env
-VITE_apiKey=AIzaSyD4rlGrtI0NGCHso6iyvAWdavQwYj0jgJs
-VITE_authDomain="collaborative-study-platform.firebaseapp.com"
-VITE_projectId=collaborative-study-platform
-VITE_storageBucket=collaborative-study-platform.firebasestorage.app
-VITE_messagingSenderId=287990554515
-VITE_appId=1:287990554515:web:9ae9678135867ce5149266
-VITE_IMAGE_HOSTING_KEY=be0132eb382f7838de12f3bbabfccc00
-VITE_STRIPE_PUBLIC_KEY=pk_test_51QfBU9Je2eXkiMTDGGESvJc0fElZVRC88MaMuDOyUVgIq2vOHiXXPAvggh73z3zTpHmx9bDU1PExOfVKr7sIBcQD00yXMie8iq
+VITE_apiKey=YOUR_FIREBASE_API_KEY
+VITE_authDomain=YOUR_FIREBASE_AUTH_DOMAIN
+VITE_projectId=YOUR_FIREBASE_PROJECT_ID
+VITE_storageBucket=YOUR_FIREBASE_STORAGE_BUCKET
+VITE_messagingSenderId=YOUR_FIREBASE_MESSAGING_SENDER_ID
+VITE_appId=YOUR_FIREBASE_APP_ID
+VITE_IMAGE_HOSTING_KEY=YOUR_IMGBB_API_KEY
+VITE_STRIPE_PUBLIC_KEY=YOUR_STRIPE_PUBLIC_KEY
 
 # API URL
-VITE_API_URL=https://collaborative-study-platform-server-three.vercel.app
+VITE_API_URL=YOUR_BACKEND_API_URL
 ```
 
 > ⚠️ **Warning:** Do **NOT** commit `.env.local` to version control (GitHub). Add it to your `.gitignore` file.
@@ -160,7 +119,7 @@ VITE_API_URL=https://collaborative-study-platform-server-three.vercel.app
 
 1. **Clone the repository**  
    ```sh
-   git clone https://github.com/your-username/collaborative-study-platform.git
+   git clone https://github.com/ashraful2871/collaborative-study-platform.git
    cd collaborative-study-platform
    ```
 
@@ -178,15 +137,7 @@ VITE_API_URL=https://collaborative-study-platform-server-three.vercel.app
    npm run dev
    ```
 
-5. **Build for production**  
-   ```sh
-   npm run build
-   ```
 
-6. **Start the production server**  
-   ```sh
-   npm start
-   ```
 
 ---
 
@@ -202,18 +153,85 @@ VITE_API_URL=https://collaborative-study-platform-server-three.vercel.app
 
 ---
 
-## 👥 Contributors
-
-- **Your Name** - [GitHub](https://github.com/your-username)
-- **Other Contributors** (Add as needed)
+If you’re using **Firebase** for production deployment, your README should include clear instructions on how to build and deploy the project. Here's an updated **Production Deployment** section:
 
 ---
 
-## 📜 License
+## 🚀 Production Deployment (Firebase)
 
-This project is licensed under the **MIT License**.  
-See the [LICENSE](LICENSE) file for details.
+To deploy the **Collaborative Study Platform** frontend to Firebase Hosting, follow these steps:
+
+### 1️⃣ Install Firebase CLI  
+Make sure you have the **Firebase CLI** installed globally:  
+```sh
+npm install -g firebase-tools
+```
+
+### 2️⃣ Login to Firebase  
+Authenticate your Firebase CLI with:  
+```sh
+firebase login
+```
+
+### 3️⃣ Initialize Firebase in Your Project  
+Run the following command inside your project folder:  
+```sh
+firebase init
+```
+- **Choose "Hosting"**  
+- **Select your Firebase project** (or create a new one)  
+- **Set `dist/` as the public directory** (for Vite projects)  
+- **Choose "Yes" for single-page app (SPA)**  
+- **Skip setting up automatic builds unless needed**  
+
+### 4️⃣ Build Your Project  
+Before deploying, create a **production build**:  
+```sh
+npm run build
+```
+
+### 5️⃣ Deploy to Firebase  
+```sh
+firebase deploy
+```
+This will upload your build files and make the site live at your **Firebase Hosting URL**.
 
 ---
 
-Let me know if you'd like any modifications! 🚀
+### 🔄 Updating Production  
+Whenever you make changes and want to update the live site:  
+1. Run `npm run build`  
+2. Run `firebase deploy`  
+
+---
+
+## 🔥 Firebase Hosting Configuration (`firebase.json`)  
+
+Ensure your `firebase.json` file is correctly set up for deployment:
+
+```json
+{
+  "hosting": {
+    "public": "dist",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
+```
+
+> **Note:**  
+> - `dist/` is the default build folder for Vite projects.  
+> - The `"rewrites"` section ensures that your **React app handles routing correctly**.
+
+---
+
+This setup ensures your project is **production-ready** and deploys smoothly on Firebase Hosting. 🚀 Let me know if you need further tweaks! 🔥
