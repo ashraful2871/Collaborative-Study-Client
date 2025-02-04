@@ -6,7 +6,7 @@ Here's a well-structured and comprehensive **README.md** file for your **Collabo
 
 The **Collaborative Study Platform** is a dynamic and interactive web application designed to facilitate learning by connecting students, tutors, and administrators. It provides essential tools for scheduling study sessions, managing resources, and fostering a collaborative learning environment.
 
-![Collaborative Study Platform](https://collaborative-study-platform.web.app)
+![Collaborative Study Platform](https://i.ibb.co.com/cX6Z9wbQ/Screenshot-2025-02-04-235842.png)
 
 ---
 
