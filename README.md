@@ -233,5 +233,3 @@ Ensure your `firebase.json` file is correctly set up for deployment:
 > - The `"rewrites"` section ensures that your **React app handles routing correctly**.
 
 ---
-
-This setup ensures your project is **production-ready** and deploys smoothly on Firebase Hosting. 🚀 Let me know if you need further tweaks! 🔥
