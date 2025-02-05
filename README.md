@@ -1,6 +1,3 @@
-Here's a well-structured and comprehensive **README.md** file for your **Collaborative Study Platform**:
-
----
 
 # 📚 Collaborative Study Platform
 
