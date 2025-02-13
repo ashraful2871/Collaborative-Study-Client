@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { FaEdit, FaTrashRestoreAlt } from "react-icons/fa";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const ApprovedSessionTableRow = ({ session, idx, refetch }) => {
   const [openModal, setOpenModal] = useState(false);
-  const [status, setStatus] = useState(session.status);
+  const [status, setStatus] = useState("");
   const axiosSecure = useAxiosSecure();
   const [loading, setLoading] = useState(false);
-
+  console.log(status);
   const handleViewModal = () => {
     console.log("modal");
     setOpenModal(true);
@@ -16,6 +17,10 @@ const ApprovedSessionTableRow = ({ session, idx, refetch }) => {
 
   //update status by admin
   const handleUpdateStatus = async (id, status) => {
+    if (!status) {
+      toast.error("Please select a status before updating.");
+      return;
+    }
     setLoading(true);
     const { data } = await axiosSecure.patch(`/change-status/${id}`, {
       status: status,
@@ -30,6 +35,7 @@ const ApprovedSessionTableRow = ({ session, idx, refetch }) => {
     }
     setOpenModal(false);
     setLoading(false);
+    setStatus("");
   };
 
   // delete session by admin
@@ -64,6 +70,7 @@ const ApprovedSessionTableRow = ({ session, idx, refetch }) => {
 
   const handleCloseModal = () => {
     setOpenModal(false);
+    setStatus("");
   };
 
   return (
@@ -127,10 +134,16 @@ const ApprovedSessionTableRow = ({ session, idx, refetch }) => {
             <div className="flex justify-center">
               <select
                 onChange={(e) => setStatus(e.target.value)}
-                defaultValue={session.status}
+                value={status}
                 className="select select-bordered w-full max-w-xs"
+                required
               >
-                <option>Approved</option>
+                {/* {session.status === "Approved" && (
+                  <option disabled>Approved</option>
+                )} */}
+                <option value="" disabled>
+                  Select Status
+                </option>
                 <option>Pending</option>
                 <option>Rejected</option>
               </select>

@@ -13,7 +13,7 @@ const PendingSessionTableTow = ({
 }) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const axiosSecure = useAxiosSecure();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     if (approve) {
       const modal = document.getElementById("upload_material_modal");
@@ -34,6 +34,7 @@ const PendingSessionTableTow = ({
   //handle reject status and give feedback
   const handleReject = async (e, id) => {
     e.preventDefault();
+    setLoading(true);
     console.log(id);
     const formData = new FormData(e.target);
     const reason = formData.get("reason");
@@ -47,6 +48,7 @@ const PendingSessionTableTow = ({
     });
     console.log(data);
     setIsOpenModal(false);
+    setLoading(false);
     refetch();
     if (data.modifiedCount > 0) {
       Swal.fire({
@@ -143,17 +145,18 @@ const PendingSessionTableTow = ({
                     </label>
                     <select
                       name="reason"
-                      // onChange={(e) => setReason(e.target.value)}
                       required
                       className="select select-bordered w-full"
+                      defaultValue=""
                     >
-                      <option disabled selected>
-                        select reason
+                      <option value="" disabled>
+                        Select reason
                       </option>
-                      <option>Spam</option>
-                      <option>Not Authorized</option>
+                      <option value="Spam">Spam</option>
+                      <option value="Not Authorized">Not Authorized</option>
                     </select>
                   </div>
+
                   <div className="form-control">
                     <label className="label">
                       <span className="label-text">Feedback</span>
@@ -162,10 +165,19 @@ const PendingSessionTableTow = ({
                       name="feedback"
                       className="textarea textarea-bordered"
                       placeholder="Feedback"
+                      required
                     ></textarea>
                   </div>
                   <div className="form-control mt-6">
-                    <button className="btn btn-primary">Sent Feedback</button>
+                    {loading ? (
+                      <button className="btn btn-primary bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg">
+                        <span className="loading loading-spinner"></span>
+                      </button>
+                    ) : (
+                      <button className="btn btn-primary bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg">
+                        Sent Feedback
+                      </button>
+                    )}
                   </div>
                 </form>
               </div>
