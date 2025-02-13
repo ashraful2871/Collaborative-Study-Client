@@ -18,7 +18,11 @@ const ApprovedSessionTableRow = ({ session, idx, refetch }) => {
   //update status by admin
   const handleUpdateStatus = async (id, status) => {
     if (!status) {
-      toast.error("Please select a status before updating.");
+      toast.error("Please select a status before updating.", {
+        style: {
+          fontWeight: "bold",
+        },
+      });
       return;
     }
     setLoading(true);
