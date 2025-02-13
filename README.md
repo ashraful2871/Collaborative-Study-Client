@@ -21,9 +21,13 @@ The **Collaborative Study Platform** is a dynamic and interactive web applicatio
 
 ## 📜 Dashboard
 
+##
+
 ### 🔐 Admin Dashboard
 
 ![Admin Dashboard](https://i.ibb.co.com/9HWPGQRj/Screenshot-2025-02-14-012631.png)
+
+##
 
 ### 🔐 Tutor Dashboard
 
