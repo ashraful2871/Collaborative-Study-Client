@@ -22,15 +22,21 @@ const AllMaterials = () => {
   }
   return (
     <div className="p-2">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-        {materials.map((material) => (
-          <AdminMaterialCard
-            key={material._id}
-            material={material}
-            refetch={refetch}
-          ></AdminMaterialCard>
-        ))}
-      </div>
+      {materials.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          {materials.map((material) => (
+            <AdminMaterialCard
+              key={material._id}
+              material={material}
+              refetch={refetch}
+            ></AdminMaterialCard>
+          ))}
+        </div>
+      ) : (
+        <p className="flex justify-center mt-96 text-blue-700 font-bold text-4xl">
+          no material found
+        </p>
+      )}
     </div>
   );
 };
