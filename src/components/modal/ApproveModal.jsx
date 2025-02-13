@@ -6,9 +6,11 @@ const ApproveModal = ({ onClose, approve, refetch }) => {
   const axiosSecure = useAxiosSecure();
   const [isPaid, setIsPaid] = useState(false);
   const [amount, setAmount] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     const { data } = await axiosSecure.patch(
       `/approve-session/${approve._id}`,
@@ -26,6 +28,7 @@ const ApproveModal = ({ onClose, approve, refetch }) => {
       onClose();
       refetch();
     }
+    setLoading(false);
     console.log(data);
   };
 
@@ -88,12 +91,18 @@ const ApproveModal = ({ onClose, approve, refetch }) => {
         )}
 
         <div className="form-control mt-4">
-          <button
-            type="submit"
-            className="btn btn-primary w-full bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg"
-          >
-            Approve Session
-          </button>
+          {loading ? (
+            <button className="btn btn-primary w-full bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg">
+              <span className="loading loading-spinner"></span>
+            </button>
+          ) : (
+            <button
+              type="submit"
+              className="btn btn-primary w-full bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg"
+            >
+              Approve Session
+            </button>
+          )}
         </div>
       </form>
     </dialog>

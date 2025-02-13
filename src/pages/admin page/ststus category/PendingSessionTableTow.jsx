@@ -13,6 +13,7 @@ const PendingSessionTableTow = ({
 }) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const axiosSecure = useAxiosSecure();
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     if (approve) {
       const modal = document.getElementById("upload_material_modal");
