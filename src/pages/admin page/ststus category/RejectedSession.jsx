@@ -24,7 +24,7 @@ const RejectedSession = ({ rejectedSession }) => {
               {rejectedSession.map((session, idx) => (
                 <tr
                   key={session._id}
-                  className="border border-gray-300 text-base text-xs md:text-base"
+                  className="border border-gray-300  text-xs md:text-base"
                 >
                   <th className="border border-gray-300">{idx + 1}</th>
                   <td className="border border-gray-300">
