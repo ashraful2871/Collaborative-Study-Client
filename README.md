@@ -23,7 +23,9 @@ The **Collaborative Study Platform** is a dynamic and interactive web applicatio
 
 ### 🔐 Admin Dashboard
 
-![Collaborative Study Platform](https://i.ibb.co.com/cX6Z9wbQ/Screenshot-2025-02-04-235842.png)
+![Collaborative Study Platform](https://i.ibb.co.com/9HWPGQRj/Screenshot-2025-02-14-012631.png)
+
+---
 
 ## 📜 Key Features
 
