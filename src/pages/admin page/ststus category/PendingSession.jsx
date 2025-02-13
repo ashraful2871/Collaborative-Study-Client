@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { FaTrashRestoreAlt } from "react-icons/fa";
-import { FcApproval } from "react-icons/fc";
+import React, { useState } from "react";
+
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import ApproveModal from "../../../components/modal/ApproveModal";

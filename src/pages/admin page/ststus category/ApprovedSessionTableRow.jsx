@@ -7,6 +7,7 @@ const ApprovedSessionTableRow = ({ session, idx, refetch }) => {
   const [openModal, setOpenModal] = useState(false);
   const [status, setStatus] = useState(session.status);
   const axiosSecure = useAxiosSecure();
+  const [loading, setLoading] = useState(false);
 
   const handleViewModal = () => {
     console.log("modal");
@@ -15,6 +16,7 @@ const ApprovedSessionTableRow = ({ session, idx, refetch }) => {
 
   //update status by admin
   const handleUpdateStatus = async (id, status) => {
+    setLoading(true);
     const { data } = await axiosSecure.patch(`/change-status/${id}`, {
       status: status,
     });
@@ -27,6 +29,7 @@ const ApprovedSessionTableRow = ({ session, idx, refetch }) => {
       });
     }
     setOpenModal(false);
+    setLoading(false);
   };
 
   // delete session by admin
@@ -140,13 +143,22 @@ const ApprovedSessionTableRow = ({ session, idx, refetch }) => {
               >
                 Cancel
               </button>
-              <button
-                onClick={() => handleUpdateStatus(session._id, status)}
-                type="button"
-                className="btn btn-primary bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg"
-              >
-                Update
-              </button>
+              {loading ? (
+                <button
+                  type="button"
+                  className="btn btn-primary bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg"
+                >
+                  <span className="loading loading-spinner"></span>
+                </button>
+              ) : (
+                <button
+                  onClick={() => handleUpdateStatus(session._id, status)}
+                  type="button"
+                  className="btn btn-primary bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg"
+                >
+                  Update
+                </button>
+              )}
             </div>
           </div>
         </dialog>
