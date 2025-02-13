@@ -79,7 +79,7 @@ const ApprovedSessionTableRow = ({ session, idx, refetch }) => {
 
   return (
     <>
-      <tr className="border border-gray-300 text-base">
+      <tr className="border border-gray-300 text-xs md:text-base">
         <th className="border border-gray-300">{idx + 1}</th>
         <td className="border border-gray-300">
           <div className="flex items-center gap-3">

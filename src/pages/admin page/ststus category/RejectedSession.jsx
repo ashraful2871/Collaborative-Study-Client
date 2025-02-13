@@ -3,14 +3,14 @@ import React from "react";
 const RejectedSession = ({ rejectedSession }) => {
   return (
     <div className="space-y-4">
-      <h2 className="text-4xl font-bold">
+      <h2 className="text-xl md:text-3xl font-bold">
         Rejected Session: {rejectedSession.length}
       </h2>
       {rejectedSession.length > 0 ? (
         <div className="overflow-x-auto">
           <table className="table font-semibold">
             {/* head */}
-            <thead className="text-center text-lg text-blue-600 ">
+            <thead className="text-center text-sm md:text-lg text-blue-600 ">
               <tr>
                 <th className="border border-gray-300">#</th>
                 <th className="border border-gray-300">Section Title-Image</th>
@@ -24,7 +24,7 @@ const RejectedSession = ({ rejectedSession }) => {
               {rejectedSession.map((session, idx) => (
                 <tr
                   key={session._id}
-                  className="border border-gray-300 text-base"
+                  className="border border-gray-300 text-base text-xs md:text-base"
                 >
                   <th className="border border-gray-300">{idx + 1}</th>
                   <td className="border border-gray-300">

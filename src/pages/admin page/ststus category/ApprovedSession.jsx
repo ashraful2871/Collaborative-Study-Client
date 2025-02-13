@@ -3,7 +3,7 @@ import ApprovedSessionTableRow from "./ApprovedSessionTableRow";
 const ApprovedSession = ({ approvedSession, refetch }) => {
   return (
     <div className="space-y-4">
-      <h2 className="text-4xl font-bold">
+      <h2 className="text-xl md:text-3xl font-bold">
         Approved Session: <span>{approvedSession.length}</span>
       </h2>
 
@@ -11,7 +11,7 @@ const ApprovedSession = ({ approvedSession, refetch }) => {
         <div className="overflow-x-auto">
           <table className="table font-semibold">
             {/* head */}
-            <thead className="border border-gray-300 text-center text-lg text-blue-600">
+            <thead className="border border-gray-300 text-center text-sm md:text-lg text-blue-600">
               <tr>
                 <th className="border border-gray-300">#</th>
                 <th className="border border-gray-300">Section Title-Image</th>
