@@ -62,9 +62,9 @@ const PendingSessionTableTow = ({
 
   return (
     <>
-      <tr>
-        <th>{idx + 1}</th>
-        <td>
+      <tr className="border border-gray-300">
+        <th className="border border-gray-300">{idx + 1}</th>
+        <td className="border border-gray-300">
           <div className="flex items-center gap-3">
             <div className="avatar">
               <div className="mask mask-squircle h-12 w-12">
@@ -76,19 +76,23 @@ const PendingSessionTableTow = ({
             </div>
           </div>
         </td>
-        <td>{session.tutor.name}</td>
-        <td> {session.tutor.email}</td>
-        <td>
-          <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-sm font-bold shadow-md transition-colors">
+
+        <td className="text-center border border-gray-300">
+          {session.tutor.name}
+        </td>
+        <td className="text-center border border-gray-300">
+          {session.tutor.email}
+        </td>
+        <td className="flex justify-center ">
+          <div className="inline-flex items-center px-3 py-1 mt-2 rounded-full gap-x-2 text-sm font-bold shadow-md transition-colors">
             <span className="h-2 w-2 rounded-full bg-yellow-500"></span>
             <span className="text-yellow-600">{session.status}</span>
           </div>
         </td>
-        <th>
+        <th className="border border-gray-300">
           <div className="flex justify-center gap-4">
             <button
               onClick={() => openModal(session)}
-              //disabled={booking.status === "Canceled"}
               className="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600 transition-all flex gap-1 items-center shadow-md disabled:bg-gray-500 disabled:cursor-not-allowed"
             >
               <FcApproval /> Approve
@@ -96,7 +100,6 @@ const PendingSessionTableTow = ({
             <button
               type="button"
               onClick={handleViewModal}
-              //disabled={booking.status === "Canceled"}
               className="bg-red-500 text-white px-3 py-1 rounded text-sm hover:bg-red-600 transition-all flex gap-1 items-center shadow-md disabled:bg-gray-500 disabled:cursor-not-allowed"
             >
               <FaTrashRestoreAlt /> Reject
@@ -104,6 +107,7 @@ const PendingSessionTableTow = ({
           </div>
         </th>
       </tr>
+
       {isOpenModal && (
         <dialog
           id="upload_material_modal"

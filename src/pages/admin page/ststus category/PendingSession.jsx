@@ -37,22 +37,22 @@ const PendingSession = ({ pendingSession, refetch }) => {
   };
 
   return (
-    <div>
+    <div className="space-y-4">
       <h2 className="text-4xl font-bold">
         Pending Session: {pendingSession.length}
       </h2>
       {pendingSession.length > 0 ? (
         <div className="overflow-x-auto">
-          <table className="table">
+          <table className="table font-semibold">
             {/* head */}
-            <thead>
+            <thead className="border border-gray-300 text-center text-lg text-blue-600">
               <tr>
-                <th>#</th>
-                <th>Section Title-Image</th>
-                <th>Tutor Name</th>
-                <th>Tutor Email</th>
-                <th>Status</th>
-                <th>Action</th>
+                <th className="border border-gray-300">#</th>
+                <th className="border border-gray-300">Section Title-Image</th>
+                <th className="border border-gray-300">Tutor Name</th>
+                <th className="border border-gray-300">Tutor Email</th>
+                <th className="border border-gray-300">Status</th>
+                <th className="border border-gray-300">Action</th>
               </tr>
             </thead>
             <tbody className="border-2 w-full">

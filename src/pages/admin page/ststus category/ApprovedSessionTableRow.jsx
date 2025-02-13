@@ -65,9 +65,9 @@ const ApprovedSessionTableRow = ({ session, idx, refetch }) => {
 
   return (
     <>
-      <tr>
-        <th>{idx + 1}</th>
-        <td>
+      <tr className="border border-gray-300 text-base">
+        <th className="border border-gray-300">{idx + 1}</th>
+        <td className="border border-gray-300">
           <div className="flex items-center gap-3">
             <div className="avatar">
               <div className="mask mask-squircle h-12 w-12">
@@ -79,15 +79,19 @@ const ApprovedSessionTableRow = ({ session, idx, refetch }) => {
             </div>
           </div>
         </td>
-        <td>{session.tutor.name}</td>
-        <td> {session.tutor.email}</td>
-        <td>
-          <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-sm font-bold shadow-md transition-colors">
+        <td className="border border-gray-300 text-center">
+          {session.tutor.name}
+        </td>
+        <td className="border border-gray-300 text-center">
+          {session.tutor.email}
+        </td>
+        <td className="flex justify-center">
+          <div className="inline-flex items-center px-3 py-1 mt-3 rounded-full gap-x-2 text-sm font-bold shadow-md transition-colors">
             <span className="h-2 w-2 rounded-full bg-green-500"></span>
             <span className="text-green-600">{session.status}</span>
           </div>
         </td>
-        <th>
+        <th className="border border-gray-300">
           <div className="flex justify-center gap-4">
             <button
               onClick={handleViewModal}
@@ -104,6 +108,7 @@ const ApprovedSessionTableRow = ({ session, idx, refetch }) => {
           </div>
         </th>
       </tr>
+
       {openModal && (
         <dialog
           id="upload_material_modal"

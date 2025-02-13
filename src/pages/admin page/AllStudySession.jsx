@@ -42,7 +42,7 @@ const AllStudySession = () => {
     return <Loading></Loading>;
   }
   return (
-    <div className="space-y-5">
+    <div className="space-y-6 p-4">
       {/* pending session */}
       <PendingSession
         pendingSession={pendingSession}
