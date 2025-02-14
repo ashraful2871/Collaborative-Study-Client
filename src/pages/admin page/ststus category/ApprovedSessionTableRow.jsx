@@ -27,22 +27,24 @@ const ApprovedSessionTableRow = ({ session, idx, refetch }) => {
       });
       return;
     }
-    if (!reason) {
-      toast.error("Please select a rejection reason before updating.", {
-        style: {
-          fontWeight: "bold",
-        },
-      });
-      return;
-    }
+    if (status === "Rejected") {
+      if (!reason) {
+        toast.error("Please select a rejection reason before updating.", {
+          style: {
+            fontWeight: "bold",
+          },
+        });
+        return;
+      }
 
-    if (!feedback) {
-      toast.error("Please input a rejection feedback before updating.", {
-        style: {
-          fontWeight: "bold",
-        },
-      });
-      return;
+      if (!feedback) {
+        toast.error("Please input a rejection feedback before updating.", {
+          style: {
+            fontWeight: "bold",
+          },
+        });
+        return;
+      }
     }
     setLoading(true);
     const { data } = await axiosSecure.patch(`/change-status/${id}`, {
