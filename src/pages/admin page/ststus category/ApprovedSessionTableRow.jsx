@@ -7,18 +7,37 @@ import toast from "react-hot-toast";
 const ApprovedSessionTableRow = ({ session, idx, refetch }) => {
   const [openModal, setOpenModal] = useState(false);
   const [status, setStatus] = useState("");
-  const axiosSecure = useAxiosSecure();
   const [loading, setLoading] = useState(false);
-  console.log(status);
+  const [reason, setReason] = useState("");
+  const [feedback, setFeedback] = useState("");
+  const axiosSecure = useAxiosSecure();
+  console.log(reason, feedback);
   const handleViewModal = () => {
     console.log("modal");
     setOpenModal(true);
   };
 
   //update status by admin
-  const handleUpdateStatus = async (id, status) => {
+  const handleUpdateStatus = async (id, status, reason, feedback) => {
     if (!status) {
       toast.error("Please select a status before updating.", {
+        style: {
+          fontWeight: "bold",
+        },
+      });
+      return;
+    }
+    if (!reason) {
+      toast.error("Please select a rejection reason before updating.", {
+        style: {
+          fontWeight: "bold",
+        },
+      });
+      return;
+    }
+
+    if (!feedback) {
+      toast.error("Please input a rejection feedback before updating.", {
         style: {
           fontWeight: "bold",
         },
@@ -28,6 +47,8 @@ const ApprovedSessionTableRow = ({ session, idx, refetch }) => {
     setLoading(true);
     const { data } = await axiosSecure.patch(`/change-status/${id}`, {
       status: status,
+      reason,
+      feedback,
     });
     if (data.modifiedCount > 0) {
       refetch();
@@ -40,6 +61,8 @@ const ApprovedSessionTableRow = ({ session, idx, refetch }) => {
     setOpenModal(false);
     setLoading(false);
     setStatus("");
+    setReason("");
+    setFeedback("");
   };
 
   // delete session by admin
@@ -75,6 +98,8 @@ const ApprovedSessionTableRow = ({ session, idx, refetch }) => {
   const handleCloseModal = () => {
     setOpenModal(false);
     setStatus("");
+    setReason("");
+    setFeedback("");
   };
 
   return (
@@ -135,23 +160,54 @@ const ApprovedSessionTableRow = ({ session, idx, refetch }) => {
               Update Approved Status
             </h3>
 
-            <div className="flex justify-center">
+            <div className="flex flex-col items-center justify-center w-full">
               <select
                 onChange={(e) => setStatus(e.target.value)}
                 value={status}
                 className="select select-bordered w-full max-w-xs"
                 required
               >
-                {/* {session.status === "Approved" && (
-                  <option disabled>Approved</option>
-                )} */}
                 <option value="" disabled>
                   Select Status
                 </option>
                 <option>Pending</option>
                 <option>Rejected</option>
               </select>
+
+              {status === "Rejected" && (
+                <div className="w-full flex flex-col items-center">
+                  <div className="w-full max-w-xs">
+                    <label className="label">
+                      <span className="label-text ">Select Reason</span>
+                    </label>
+                    <select
+                      onChange={(e) => setReason(e.target.value)}
+                      value={reason}
+                      className="select select-bordered w-full max-w-xs"
+                      required
+                    >
+                      <option value="" disabled>
+                        Select reason
+                      </option>
+                      <option value="Spam">Spam</option>
+                      <option value="Not Authorized">Not Authorized</option>
+                    </select>
+                  </div>
+                  <div className="w-full max-w-xs">
+                    <label className="label">
+                      <span className="label-text text-center">Feedback</span>
+                    </label>
+                    <textarea
+                      className="textarea textarea-bordered w-full max-w-xs"
+                      placeholder="Feedback"
+                      required
+                      onChange={(e) => setFeedback(e.target.value)}
+                    ></textarea>
+                  </div>
+                </div>
+              )}
             </div>
+
             <div className="card-actions justify-between">
               <button
                 type="button"
@@ -169,7 +225,9 @@ const ApprovedSessionTableRow = ({ session, idx, refetch }) => {
                 </button>
               ) : (
                 <button
-                  onClick={() => handleUpdateStatus(session._id, status)}
+                  onClick={() =>
+                    handleUpdateStatus(session._id, status, reason, feedback)
+                  }
                   type="button"
                   className="btn btn-primary bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg"
                 >
