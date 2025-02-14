@@ -170,11 +170,11 @@ const PendingSessionTableTow = ({
                   </div>
                   <div className="form-control mt-6">
                     {loading ? (
-                      <button className="btn btn-primary bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg">
+                      <button className="btn bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg">
                         <span className="loading loading-spinner"></span>
                       </button>
                     ) : (
-                      <button className="btn btn-primary bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg">
+                      <button className="btn bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg">
                         Sent Feedback
                       </button>
                     )}
