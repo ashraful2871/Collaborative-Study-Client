@@ -73,7 +73,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className="navbar bg-base-100 flex items-center justify-between">
+      <div className="navbar bg-base-100 flex items-center justify-between fixed z-50 max-w-7xl mx-auto -mt-5">
         <div className="flex items-center">
           <Link to="/">
             <div className="flex items-center">
