@@ -4,6 +4,7 @@ import StudySession from "./studey session section/StudySession";
 import AllTutor from "./tutor/AllTutor";
 import PopularTutor from "./tutor/PopularTutor";
 import RecentJoinTutor from "./tutor/RecentJoinTutor";
+import ReviewSection from "../pages/student page/ReviewSection";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <PopularTutor></PopularTutor>
       <RecentJoinTutor></RecentJoinTutor>
       <AllTutor></AllTutor>
+      <ReviewSection></ReviewSection>
     </div>
   );
 };
