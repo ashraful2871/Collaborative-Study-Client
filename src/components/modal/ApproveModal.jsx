@@ -86,6 +86,7 @@ const ApproveModal = ({ onClose, approve, refetch }) => {
               type="number"
               onChange={(e) => setAmount(e.target.value)}
               className="input input-bordered w-full"
+              required
             />
           </div>
         )}
