@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 const TutorMenu = () => {
   return (
     <div>
-      <ul className="menu">
+      <ul className="menu text-white font-semibold text-base">
         <li>
           <NavLink to="/dashboard/view-all-study">
             View all study sessions

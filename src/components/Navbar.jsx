@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import useRole from "../hooks/useRole";
+import DarkLightMood from "./DarkLightMood";
+import { ThemeContext } from "../provider/themeProvider";
 
 const Navbar = () => {
   const { user, signOutUser } = useAuth();
   const [role] = useRole();
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   const DropDownLinks = (
     <>
@@ -90,6 +93,16 @@ const Navbar = () => {
         </div>
         <div className="flex items-center">
           <ul className="menu menu-horizontal p-0 ">{links}</ul>
+          <div>
+            {/* <DarkLightMood></DarkLightMood> */}
+            <button
+              className="btn btn-ghost btn-sm"
+              onClick={toggleTheme}
+              aria-label="Toggle Theme"
+            >
+              {theme === "light" ? "🌞" : "🌜"}
+            </button>
+          </div>
           <div className="dropdown dropdown-end">
             <div
               tabIndex={0}

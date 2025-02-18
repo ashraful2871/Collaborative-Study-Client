@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import TutorMenu from "../../components/sidebar/tutor/Tutormenu";
 import AdminMenu from "../../components/sidebar/admin/AdminMenu";
@@ -7,16 +7,21 @@ import useRole from "../../hooks/useRole";
 import { LuLogOut } from "react-icons/lu";
 import useAuth from "../../hooks/useAuth";
 import { TiThMenu } from "react-icons/ti";
+import { ThemeContext } from "../../provider/themeProvider";
 
 const Dashboard = () => {
   const [role, isLoading] = useRole();
   const { signOutUser } = useAuth();
-
+  const { theme } = useContext(ThemeContext);
   return (
     <>
       <div className="lg:flex lg:h-screen overflow-hidden">
         {/* Sidebar */}
-        <div className=" lg:w-64 bg-gray-100 flex flex-col justify-between lg:h-full">
+        <div
+          className={`lg:w-64 ${theme === "light" && "bg-gray-100"}  ${
+            theme === "dark" && "border border-blue-500 rounded-xl"
+          } flex flex-col justify-between lg:h-full`}
+        >
           <div className="hidden lg:block lg:h-full overflow-y-auto">
             <div className="mb-6 text-center p-4">
               <Link to="/" className="text-xl font-bold text-green-700">
@@ -61,7 +66,7 @@ const Dashboard = () => {
                   <li>
                     <button
                       onClick={signOutUser}
-                      className="flex items-center p-2 text-base font-bold"
+                      className="flex items-center p-2 text-base font-bold text-white"
                     >
                       Logout
                       <LuLogOut />
@@ -88,7 +93,7 @@ const Dashboard = () => {
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 h-full overflow-y-auto p-4 bg-gray-50">
+        <div className="flex-1 h-full overflow-y-auto p-4 bg-base-100">
           <Outlet />
         </div>
       </div>
