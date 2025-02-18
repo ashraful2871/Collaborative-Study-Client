@@ -36,7 +36,7 @@ const ApproveModal = ({ onClose, approve, refetch }) => {
     <dialog id="upload_material_modal" className="modal">
       <form
         method="dialog"
-        className="modal-box w-11/12 max-w-5xl p-6 space-y-4 bg-white rounded-lg shadow-lg"
+        className="modal-box w-11/12 max-w-5xl p-6 space-y-4 rounded-lg shadow-lg"
         onSubmit={handleSubmit}
       >
         <button

@@ -28,7 +28,7 @@ const AllTutor = () => {
         ))}
       </div>
       <Link to="/all-tutors">
-        <button className="btn btn-primary bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg mt-3">
+        <button className="btn bg-blue-500 hover:bg-blue-600 font-bold text-white text-sm mt-4">
           See All Tutor
         </button>
       </Link>

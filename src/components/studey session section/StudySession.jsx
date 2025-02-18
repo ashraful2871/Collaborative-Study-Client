@@ -31,7 +31,7 @@ const StudySession = () => {
         ))}
       </div>
       <Link to="/all-sessions">
-        <button className="btn btn-primary bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg">
+        <button className="btn bg-blue-500 hover:bg-blue-600 font-bold text-white text-sm mt-4">
           See More
         </button>
       </Link>

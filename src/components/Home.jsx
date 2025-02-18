@@ -5,7 +5,7 @@ import AllTutor from "./tutor/AllTutor";
 
 const Home = () => {
   return (
-    <div className="space-y-12">
+    <div className="space-y-12 mb-12">
       <Slider></Slider>
       <StudySession></StudySession>
       <AllTutor></AllTutor>

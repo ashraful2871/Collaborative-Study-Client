@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 const StudentMenu = () => {
   return (
     <div>
-      <ul className="menu text-white font-semibold text-base">
+      <ul className="menu font-semibold text-base text-base-content">
         {" "}
         <li>
           <NavLink to="/dashboard/view-book-session">
