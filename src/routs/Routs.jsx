@@ -22,6 +22,7 @@ import Payment from "../components/studey session section/payment/Payment";
 import AdminRoute from "../privet/AdminRoute";
 import TutorRoute from "../privet/TutorRoute";
 import StudentRoute from "../privet/StudentRoute";
+import AllSession from "../pages/admin page/AllSession";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -38,6 +39,10 @@ export const router = createBrowserRouter([
       {
         path: "/sign-up",
         element: <SignUp></SignUp>,
+      },
+      {
+        path: "/all-sessions",
+        element: <AllSession></AllSession>,
       },
       {
         path: "/session-details/:id",
