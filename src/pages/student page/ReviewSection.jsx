@@ -68,11 +68,11 @@ const ReviewSection = () => {
           </div>
           <div className="text-center">
             {loading ? (
-              <button className="btn btn-primary w-full bg-blue-500 hover:bg-blue-600 font-bold text-white text-base">
+              <button className="btn w-full bg-blue-500 hover:bg-blue-600 font-bold text-white text-base">
                 <span className="loading loading-spinner"></span>
               </button>
             ) : (
-              <button className="btn btn-primary w-full bg-blue-500 hover:bg-blue-600 font-bold text-white text-base">
+              <button className="btn w-full bg-blue-500 hover:bg-blue-600 font-bold text-white text-base">
                 Send Review
               </button>
             )}

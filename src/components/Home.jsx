@@ -5,6 +5,7 @@ import AllTutor from "./tutor/AllTutor";
 import PopularTutor from "./tutor/PopularTutor";
 import RecentJoinTutor from "./tutor/RecentJoinTutor";
 import ReviewSection from "../pages/student page/ReviewSection";
+import Newsletter from "./Newsletter";
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
       <RecentJoinTutor></RecentJoinTutor>
       <AllTutor></AllTutor>
       <ReviewSection></ReviewSection>
+      <Newsletter></Newsletter>
     </div>
   );
 };
