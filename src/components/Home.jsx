@@ -6,6 +6,7 @@ import PopularTutor from "./tutor/PopularTutor";
 import RecentJoinTutor from "./tutor/RecentJoinTutor";
 import ReviewSection from "../pages/student page/ReviewSection";
 import Newsletter from "./Newsletter";
+import FeaturedSession from "./FeaturedSession";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <Slider></Slider>
       <StudySession></StudySession>
       <PopularTutor></PopularTutor>
+      <FeaturedSession></FeaturedSession>
       <RecentJoinTutor></RecentJoinTutor>
       <AllTutor></AllTutor>
       <ReviewSection></ReviewSection>
