@@ -54,7 +54,7 @@ const AllStudySessionCard = ({ study }) => {
           <div className="card-actions justify-end mt-auto">
             <Link to={`/session-details/${_id}`}>
               {" "}
-              <button className="btn btn-primary bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg">
+              <button className="btn btn-outline hover:bg-blue-600  font-semibold hover:text-white text-lg border-blue-500">
                 Read More
               </button>
             </Link>
