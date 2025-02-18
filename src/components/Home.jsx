@@ -3,6 +3,7 @@ import Slider from "./slider/Slider";
 import StudySession from "./studey session section/StudySession";
 import AllTutor from "./tutor/AllTutor";
 import PopularTutor from "./tutor/PopularTutor";
+import RecentJoinTutor from "./tutor/RecentJoinTutor";
 
 const Home = () => {
   return (
@@ -10,6 +11,7 @@ const Home = () => {
       <Slider></Slider>
       <StudySession></StudySession>
       <PopularTutor></PopularTutor>
+      <RecentJoinTutor></RecentJoinTutor>
       <AllTutor></AllTutor>
     </div>
   );
