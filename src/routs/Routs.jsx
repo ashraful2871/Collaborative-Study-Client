@@ -23,6 +23,7 @@ import AdminRoute from "../privet/AdminRoute";
 import TutorRoute from "../privet/TutorRoute";
 import StudentRoute from "../privet/StudentRoute";
 import AllSession from "../pages/admin page/AllSession";
+import AllTutorPage from "../pages/Tutor-page/AllTutorPage";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
       {
         path: "/all-sessions",
         element: <AllSession></AllSession>,
+      },
+      {
+        path: "/all-tutors",
+        element: <AllTutorPage></AllTutorPage>,
       },
       {
         path: "/session-details/:id",

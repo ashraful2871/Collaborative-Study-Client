@@ -1,11 +1,10 @@
 import React from "react";
-import AllTutorCard from "./AllTutorCard";
-import { useQuery } from "@tanstack/react-query";
+import Loading from "../../components/Loading";
 import axios from "axios";
-import Loading from "../Loading";
-import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import AllTutorCard from "../../components/tutor/AllTutorCard";
 
-const AllTutor = () => {
+const AllTutorPage = () => {
   const { data: tutors = [], isLoading } = useQuery({
     queryKey: ["tutors"],
     queryFn: async () => {
@@ -21,19 +20,14 @@ const AllTutor = () => {
   }
   return (
     <div className="space-y-5">
-      <h2 className="text-4xl font-bold">All Tutor</h2>
+      <h2 className="text-4xl font-bold text-center">All Tutor</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
-        {tutors.slice(0, 10).map((tutor) => (
+        {tutors.map((tutor) => (
           <AllTutorCard key={tutor._id} tutor={tutor}></AllTutorCard>
         ))}
       </div>
-      <Link to="/all-tutors">
-        <button className="btn btn-primary bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg mt-3">
-          See All Tutor
-        </button>
-      </Link>
     </div>
   );
 };
 
-export default AllTutor;
+export default AllTutorPage;
