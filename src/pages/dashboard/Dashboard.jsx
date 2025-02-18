@@ -4,7 +4,6 @@ import TutorMenu from "../../components/sidebar/tutor/Tutormenu";
 import AdminMenu from "../../components/sidebar/admin/AdminMenu";
 import StudentMenu from "../../components/sidebar/admin/student/StudentMenu";
 import useRole from "../../hooks/useRole";
-import Footer from "../../components/Footer";
 import { LuLogOut } from "react-icons/lu";
 import useAuth from "../../hooks/useAuth";
 import { TiThMenu } from "react-icons/ti";
@@ -15,11 +14,11 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="flex flex-col lg:flex-row">
+      <div className="lg:flex lg:h-screen overflow-hidden">
         {/* Sidebar */}
-        <div className="w-full lg:w-64 p-4 bg-gray-100 flex flex-col justify-between lg:min-h-screen">
-          <div className="hidden lg:block">
-            <div className="mb-6 text-center">
+        <div className=" lg:w-64 bg-gray-100 flex flex-col justify-between lg:h-full">
+          <div className="hidden lg:block lg:h-full overflow-y-auto">
+            <div className="mb-6 text-center p-4">
               <Link to="/" className="text-xl font-bold text-green-700">
                 Collaborative Study
               </Link>
@@ -33,10 +32,10 @@ const Dashboard = () => {
           <div className="drawer z-50 block lg:hidden">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content">
-              {/* Page content here */}
+              {/* Responsive Drawer Toggle */}
               <label
                 htmlFor="my-drawer"
-                className="btn btn-primary bg-blue-500 hover:bg-blue-600  font-semibold text-white text-lg"
+                className="btn btn-primary bg-blue-500 hover:bg-blue-600 font-semibold text-white text-lg m-2"
               >
                 <TiThMenu />
               </label>
@@ -47,7 +46,7 @@ const Dashboard = () => {
                 aria-label="close sidebar"
                 className="drawer-overlay"
               ></label>
-              <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+              <ul className="menu bg-base-200 text-base-content h-full w-80 p-4">
                 <div className="mb-6 text-center">
                   <Link to="/" className="text-xl font-bold text-green-700">
                     Collaborative Study
@@ -73,7 +72,7 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="mt-auto hidden lg:block">
+          <div className="mt-auto hidden lg:block p-4">
             <ul className="menu">
               <li>
                 <button
@@ -89,13 +88,9 @@ const Dashboard = () => {
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 p-2">
+        <div className="flex-1 h-full overflow-y-auto p-4 bg-gray-50">
           <Outlet />
         </div>
-      </div>
-
-      <div className="mt-6">
-        <Footer />
       </div>
     </>
   );
