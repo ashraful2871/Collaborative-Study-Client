@@ -12,7 +12,7 @@ const ViewBookedSessionCard = ({ session }) => {
 
       <div className="card-body p-5 space-y-3 flex flex-col flex-grow">
         <div className="flex justify-between items-center">
-          <span className="text-sm text-gray-500">Tutor: {tutor?.name}</span>
+          <span className="text-sm ">Tutor: {tutor?.name}</span>
           <span className="text-lg font-semibold text-blue-500">
             ${registrationFee}
           </span>
@@ -20,9 +20,7 @@ const ViewBookedSessionCard = ({ session }) => {
 
         <h2 className="card-title text-xl font-bold">{sessionTitle}</h2>
 
-        <p className="text-sm text-gray-600 flex-grow line-clamp-3">
-          {description}
-        </p>
+        <p className="text-sm flex-grow line-clamp-3">{description}</p>
 
         <div className="card-actions">
           <Link to={`/dashboard/booked-details/${_id}`}>

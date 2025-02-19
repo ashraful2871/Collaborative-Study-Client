@@ -64,10 +64,10 @@ const BookedDetails = () => {
         <div className="text-center mb-10 ">
           <div>
             <h1 className="text-3xl font-bold">
-              <span className="text-black">View Your </span>
+              <span className="text-base-content">View Your </span>
               <span className="text-primary">Booked Study Session Details</span>
             </h1>
-            <p className="text-gray-600 mt-3">
+            <p className="mt-3 ">
               Feeling overwhelmed by upcoming exams and projects? Juggling a
               busy schedule can make it tough to keep track of your booked study
               sessions. This guide is here to help! Designed specifically for
@@ -96,7 +96,7 @@ const BookedDetails = () => {
             <h2 className="card-title text-primary text-center">
               {sessionTitle}
             </h2>
-            <p className="text-gray-700 mb-5">{description}</p>
+            <p className=" mb-5">{description}</p>
             <div className="grid md:grid-cols-2 gap-4">
               <p>
                 <strong>Student Name: </strong> {studentName}
@@ -126,11 +126,11 @@ const BookedDetails = () => {
         </div>
 
         {/* Review and Rating Form */}
-        <div className="card bg-base-100 shadow-md p-5">
+        <div className="card bg-base-100 shadow-md p-5 ">
           <h3 className="text-xl font-bold text-center text-primary mb-5">
             Please Provide Your Review & Rating
           </h3>
-          <p className="text-gray-600 text-center mb-8">
+          <p className=" text-center mb-8 text-base-content">
             Feeling overwhelmed by upcoming exams and projects? Juggling a busy
             schedule can make it tough to keep track of your booked study
             sessions. This guide is here to help!

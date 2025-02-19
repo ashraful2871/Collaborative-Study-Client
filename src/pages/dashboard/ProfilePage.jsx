@@ -1,4 +1,4 @@
-import { FaUserCircle, FaEnvelope, FaUserTag } from "react-icons/fa";
+import { FaEnvelope, FaUserTag } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import useRole from "../../hooks/useRole";
 
