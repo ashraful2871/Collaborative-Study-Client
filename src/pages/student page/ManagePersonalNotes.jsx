@@ -25,15 +25,21 @@ const ManagePersonalNotes = () => {
   }
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-        {notes.map((note) => (
-          <ManagePersonalNoteCart
-            key={note._id}
-            note={note}
-            refetch={refetch}
-          ></ManagePersonalNoteCart>
-        ))}
-      </div>
+      {notes.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+          {notes.map((note) => (
+            <ManagePersonalNoteCart
+              key={note._id}
+              note={note}
+              refetch={refetch}
+            ></ManagePersonalNoteCart>
+          ))}
+        </div>
+      ) : (
+        <p className="flex justify-center mt-96 text-blue-700 font-bold text-4xl">
+          no notes found
+        </p>
+      )}
     </div>
   );
 };

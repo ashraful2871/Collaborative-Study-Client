@@ -2,7 +2,6 @@ import React from "react";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
-import Loading from "../../components/Loading";
 import ViewAllStudyMaterialCard from "./ViewAllStudyMaterialCard";
 
 const ViewStudyMaterials = () => {
@@ -17,20 +16,23 @@ const ViewStudyMaterials = () => {
       return data;
     },
   });
-  console.log(materials);
-  if (isLoading) {
-    return <Loading></Loading>;
-  }
+
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
-        {materials.map((material) => (
-          <ViewAllStudyMaterialCard
-            key={material._id}
-            material={material}
-          ></ViewAllStudyMaterialCard>
-        ))}
-      </div>
+      {materials.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+          {materials.map((material) => (
+            <ViewAllStudyMaterialCard
+              key={material._id}
+              material={material}
+            ></ViewAllStudyMaterialCard>
+          ))}
+        </div>
+      ) : (
+        <p className="flex justify-center mt-96 text-blue-700 font-bold text-4xl">
+          no study material found
+        </p>
+      )}
     </div>
   );
 };
