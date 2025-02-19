@@ -24,6 +24,8 @@ import TutorRoute from "../privet/TutorRoute";
 import StudentRoute from "../privet/StudentRoute";
 import AllSession from "../pages/admin page/AllSession";
 import AllTutorPage from "../pages/Tutor-page/AllTutorPage";
+import Profile from "../pages/dashboard/Profile";
+import ProfilePage from "../pages/dashboard/ProfilePage";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -184,6 +186,10 @@ export const router = createBrowserRouter([
             <BookedDetails></BookedDetails>,
           </StudentRoute>
         ),
+      },
+      {
+        path: "profile",
+        element: <ProfilePage></ProfilePage>,
       },
     ],
   },

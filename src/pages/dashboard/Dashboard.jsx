@@ -29,10 +29,12 @@ const Dashboard = () => {
               </Link>
             </div>
 
-            {/* Sidebar Menus */}
-            {role === "admin" && <AdminMenu />}
-            {role === "tutor" && <TutorMenu />}
-            {role === "student" && <StudentMenu />}
+            <div>
+              {/* Sidebar Menus */}
+              {role === "admin" && <AdminMenu />}
+              {role === "tutor" && <TutorMenu />}
+              {role === "student" && <StudentMenu />}
+            </div>
           </div>
           <div className="drawer z-50 block lg:hidden">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />

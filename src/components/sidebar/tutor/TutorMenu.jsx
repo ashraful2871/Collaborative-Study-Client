@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import Profile from "../../../pages/dashboard/Profile";
 
 const TutorMenu = () => {
   return (
@@ -21,6 +22,7 @@ const TutorMenu = () => {
             View all materials
           </NavLink>
         </li>
+        <Profile></Profile>
       </ul>
     </div>
   );
