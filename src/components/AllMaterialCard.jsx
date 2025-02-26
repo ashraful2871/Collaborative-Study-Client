@@ -48,7 +48,7 @@ const AllMaterialCard = ({ material, refetch }) => {
   };
 
   return (
-    <div className="card   border-2 rounded-lg overflow-hidden">
+    <div className="card  border-2 rounded-lg overflow-hidden">
       {/* Image Section */}
       <img
         src={image}
@@ -60,7 +60,7 @@ const AllMaterialCard = ({ material, refetch }) => {
       <div className="p-4">
         {/* Study Session Material ID */}
         <div className="card-body">
-          <p className="text-gray-700 text-sm mb-2">
+          <p className="text-base-content text-sm mb-2">
             <span className="font-semibold">Study Session Material Id:</span>{" "}
             {materialId}
           </p>
@@ -69,7 +69,7 @@ const AllMaterialCard = ({ material, refetch }) => {
           <Link target="_blank" to={driveLink} className="btn-link">
             <span className="font-semibold">Material Link</span>{" "}
           </Link>
-          <p className="text-gray-700 text-sm my-3">
+          <p className="text-base-content text-sm my-3">
             <span className="font-semibold">{tutorEmail}</span>{" "}
           </p>
         </div>

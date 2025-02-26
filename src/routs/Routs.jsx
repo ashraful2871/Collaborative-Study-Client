@@ -53,11 +53,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/session-details/:id",
-        element: (
-          <Privet>
-            <SessionDetails></SessionDetails>
-          </Privet>
-        ),
+        element: <SessionDetails></SessionDetails>,
       },
       {
         path: "/booked-details/:id",

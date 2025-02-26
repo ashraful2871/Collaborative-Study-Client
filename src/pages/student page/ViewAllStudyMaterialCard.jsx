@@ -84,7 +84,7 @@ const ViewAllStudyMaterialCard = ({ material }) => {
             </h3>
 
             <div className="flex justify-center">
-              <div className="card w-full md:w-96 bg-white space-y-5 border rounded-lg overflow-hidden shadow-lg">
+              <div className="card w-full md:w-96 space-y-5 border rounded-lg overflow-hidden shadow-lg">
                 <img
                   src={materialImage}
                   alt="Study Material"

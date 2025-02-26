@@ -50,7 +50,7 @@ const StudySessionCard = ({ study, refetch }) => {
     });
   };
   return (
-    <div className="card bg-white shadow-md rounded-lg max-w-md mx-auto border border-gray-300">
+    <div className="card   shadow-md rounded-lg max-w-md mx-auto border border-gray-300">
       <figure>
         <img
           src={image}
@@ -61,7 +61,9 @@ const StudySessionCard = ({ study, refetch }) => {
       <div className="card-body p-4">
         <div className="flex items-center gap-3">
           <div>
-            <h2 className="text-xl font-bold text-gray-800">{sessionTitle}</h2>
+            <h2 className="text-xl font-bold text-base-content">
+              {sessionTitle}
+            </h2>
           </div>
           <div className="mt-2">
             {status === "Pending" && (
@@ -84,33 +86,35 @@ const StudySessionCard = ({ study, refetch }) => {
             )}
           </div>
         </div>
-        <p className="text-sm text-gray-600 mt-2">{description}</p>
+        <p className="text-sm text-base-content mt-2">{description}</p>
 
         <div className="mt-4">
           <p className="text-sm">
-            <span className="font-semibold text-gray-800">
+            <span className="font-semibold text-base-content">
               Registration Start Time:
             </span>{" "}
             <span className="text-orange-500">{registrationStart}</span>
           </p>
           <p className="text-sm">
-            <span className="font-semibold text-gray-800">
+            <span className="font-semibold text-base-content">
               Registration End Time:
             </span>{" "}
             <span className="text-orange-500">{registrationEnd}</span>
           </p>
           <p className="text-sm">
-            <span className="font-semibold text-gray-800">
+            <span className="font-semibold text-base-content">
               Class Start Time:
             </span>{" "}
             <span className="text-orange-500">{classStart}</span>
           </p>
           <p className="text-sm">
-            <span className="font-semibold text-gray-800">Class End Time:</span>{" "}
+            <span className="font-semibold text-base-content">
+              Class End Time:
+            </span>{" "}
             <span className="text-orange-500">{classEnd}</span>
           </p>
           <p className="text-sm">
-            <span className="font-semibold text-gray-800">
+            <span className="font-semibold text-base-content">
               Session Duration:
             </span>{" "}
             <span className="text-orange-500">
@@ -118,7 +122,7 @@ const StudySessionCard = ({ study, refetch }) => {
             </span>
           </p>
           <p className="text-sm">
-            <span className="font-semibold text-gray-800">Fee:</span>{" "}
+            <span className="font-semibold text-base-content">Fee:</span>{" "}
             <span className="text-green-500">${registrationFee}</span>
           </p>
         </div>
