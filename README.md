@@ -265,10 +265,3 @@ Ensure your `firebase.json` file is correctly set up for deployment:
   }
 }
 ```
-
-> **Note:**
->
-> - `dist/` is the default build folder for Vite projects.
-> - The `"rewrites"` section ensures that your **React app handles routing correctly**.
-
----
