@@ -4,12 +4,12 @@ export const ThemeContext = createContext();
 
 const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(() => {
-    return localStorage.getItem("theme") || "light"; // Retrieve theme from localStorage
+    return localStorage.getItem("theme") || "light";
   });
 
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme); // Set the theme attribute
-    localStorage.setItem("theme", theme); // Save theme to localStorage
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
   }, [theme]);
 
   const toggleTheme = () => {
