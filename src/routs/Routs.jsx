@@ -26,6 +26,8 @@ import AllSession from "../pages/admin page/AllSession";
 import AllTutorPage from "../pages/Tutor-page/AllTutorPage";
 import Profile from "../pages/dashboard/Profile";
 import ProfilePage from "../pages/dashboard/ProfilePage";
+import WeeklyChart from "../components/sidebar/admin/WeeklyChart";
+import Overview from "../components/sidebar/admin/Overview";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -138,6 +140,15 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <AllMaterials></AllMaterials>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "overview",
+
+        element: (
+          <AdminRoute>
+            <Overview></Overview>
           </AdminRoute>
         ),
       },

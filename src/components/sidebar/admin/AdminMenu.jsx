@@ -8,6 +8,9 @@ const AdminMenu = () => {
       <ul className="menu font-semibold text-base text-base-content">
         {" "}
         <li>
+          <NavLink to="/dashboard/overview">Overview</NavLink>
+        </li>
+        <li>
           <NavLink to="/dashboard/all-study-session">
             View all study session
           </NavLink>
