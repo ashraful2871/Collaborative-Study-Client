@@ -29,6 +29,18 @@ The **Collaborative Study Platform** is a dynamic and interactive web applicatio
 
 ---
 
+Admin:admin
+ID:admin1@gmail.com
+Password:Admin123@
+
+Tutor:tutor
+ID:tutor1@gmail.com
+Password:Tutor123@
+
+User:student
+ID:student1@gmail.com
+Password:Student123@
+
 ## 📜 Dashboard
 
 ### 🔐 Admin Dashboard

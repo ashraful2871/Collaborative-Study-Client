@@ -13,7 +13,7 @@ const Navbar = () => {
     <>
       {user && role === "admin" && (
         <li>
-          <NavLink to="/dashboard/all-study-session">Dashboard</NavLink>
+          <NavLink to="/dashboard/overview">Dashboard</NavLink>
         </li>
       )}
       {user && role === "tutor" && (
