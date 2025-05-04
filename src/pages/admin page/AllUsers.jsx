@@ -89,89 +89,93 @@ const AllUsers = () => {
   };
 
   return (
-    <div>
-      <input
-        type="email"
-        onChange={(e) => setSearch(e.target.value)}
-        placeholder="Search by Email"
-        className="input input-bordered w-full max-w-xs"
-      />
-      <>
-        {isLoading ? (
-          <Loading></Loading>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="table">
-              <thead>
-                <tr className="text-center">
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Role</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {users.map((user, idx) => (
-                  <tr key={user._id} className="hover text-center">
-                    <th>{(currentPage - 1) * rowsPerPage + idx + 1}</th>
-                    <td>
-                      <div className="flex items-center gap-3">
-                        <div className="avatar">
-                          <div className="mask mask-squircle h-12 w-12">
-                            <img
-                              referrerPolicy="no-referrer"
-                              className="rounded-full"
-                              src={user.photo}
-                              alt="Avatar Tailwind CSS Component"
-                            />
+    <>
+      <h2 className="text-3xl  font-bold mb-5 text-center">All User</h2>
+
+      <div>
+        <input
+          type="email"
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search by Email"
+          className="input input-bordered w-full max-w-xs"
+        />
+        <>
+          {isLoading ? (
+            <Loading></Loading>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="table">
+                <thead>
+                  <tr className="text-center">
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {users.map((user, idx) => (
+                    <tr key={user._id} className="hover text-center">
+                      <th>{(currentPage - 1) * rowsPerPage + idx + 1}</th>
+                      <td>
+                        <div className="flex items-center gap-3">
+                          <div className="avatar">
+                            <div className="mask mask-squircle h-12 w-12">
+                              <img
+                                referrerPolicy="no-referrer"
+                                className="rounded-full"
+                                src={user.photo}
+                                alt="Avatar Tailwind CSS Component"
+                              />
+                            </div>
+                          </div>
+                          <div>
+                            <div className="font-bold">{user.name}</div>
                           </div>
                         </div>
-                        <div>
-                          <div className="font-bold">{user.name}</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>{user.email}</td>
-                    <td>{user.role}</td>
-                    <th>
-                      <button
-                        onClick={() => handleMAkeAdmin(user)}
-                        className="btn hover:bg-blue-600 bg-blue-500 text-white btn-sm"
-                      >
-                        Make Admin
-                      </button>
-                      <button
-                        onClick={() => handleMakeTutor(user)}
-                        className="btn btn-neutral btn-sm"
-                      >
-                        Make Tutor
-                      </button>
-                    </th>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </>
+                      </td>
+                      <td>{user.email}</td>
+                      <td>{user.role}</td>
+                      <th>
+                        <button
+                          onClick={() => handleMAkeAdmin(user)}
+                          className="btn hover:bg-blue-600 bg-blue-500 text-white btn-sm"
+                        >
+                          Make Admin
+                        </button>
+                        <button
+                          onClick={() => handleMakeTutor(user)}
+                          className="btn btn-neutral btn-sm"
+                        >
+                          Make Tutor
+                        </button>
+                      </th>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </>
 
-      <div className="flex justify-center mt-4">
-        {[...Array(totalPages).keys()].map((page) => (
-          <button
-            key={page + 1}
-            onClick={() => handlePageChange(page + 1)}
-            className={`btn btn-sm mx-1 ${
-              currentPage === page + 1
-                ? "btn hover:bg-blue-600 bg-blue-500 text-white"
-                : "btn-outline hover:bg-blue-600"
-            }`}
-          >
-            {page + 1}
-          </button>
-        ))}
+        <div className="flex justify-center mt-4">
+          {[...Array(totalPages).keys()].map((page) => (
+            <button
+              key={page + 1}
+              onClick={() => handlePageChange(page + 1)}
+              className={`btn btn-sm mx-1 ${
+                currentPage === page + 1
+                  ? "btn hover:bg-blue-600 bg-blue-500 text-white"
+                  : "btn-outline hover:bg-blue-600"
+              }`}
+            >
+              {page + 1}
+            </button>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
