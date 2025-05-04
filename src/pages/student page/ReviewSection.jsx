@@ -44,8 +44,6 @@ const ReviewSection = () => {
               your Email:
             </label>
             <input
-              value={user?.email}
-              readOnly
               type="email"
               className={`input input-bordered w-full ${
                 theme === "light" && "bg-gray-100"
