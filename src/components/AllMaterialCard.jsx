@@ -24,6 +24,8 @@ const AllMaterialCard = ({ material, refetch }) => {
   };
 
   //delete material
+  //delete material
+  //delete material
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
