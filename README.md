@@ -14,8 +14,13 @@ The **Collaborative Study Platform** is a dynamic and interactive web applicatio
 
 ## 🔑 Admin Credentials
 
-- **Admin Email:** `admin@gmail.com`
+- **Admin Email:** `admin1@gmail.com`
 - **Admin Password:** `Admin123@`
+
+## 🔑 tutor Credentials
+
+- **Admin Email:** `tutor@gmail.com`
+- **Admin Password:** `Tutor123@`
 
 ---
 
