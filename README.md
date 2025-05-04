@@ -5,6 +5,7 @@ The **Collaborative Study Platform** is a dynamic and interactive web applicatio
 <!-- ![Collaborative Study Platform](https://i.ibb.co.com/cX6Z9wbQ/Screenshot-2025-02-04-235842.png) -->
 
 ![Collaborative Study Platform](https://i.ibb.co.com/QFVsHS4K/Screenshot-2025-05-04-100350.png)
+![Collaborative Study Platform](https://i.ibb.co.com/QFVsHS4K/Screenshot-2025-05-04-100350.png)
 
 ---
 
