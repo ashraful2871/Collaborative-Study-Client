@@ -6,7 +6,6 @@ const AdminMenu = () => {
   return (
     <div>
       <ul className="menu font-semibold text-base text-base-content">
-        {" "}
         <li>
           <NavLink to="/dashboard/overview">Overview</NavLink>
         </li>
